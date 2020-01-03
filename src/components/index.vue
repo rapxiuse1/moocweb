@@ -28,12 +28,16 @@
 </template>
 
 <script>
+import ajax from '../api/ajax'
 export default {
   name: 'index',
   data () {
     return {
       
     }
+  },
+  created(){
+    
   },
   methods:{
     turnToPage (name) {

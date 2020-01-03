@@ -33,40 +33,19 @@
             </Header>
             <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
-                        <Submenu name="1">
+                    <Menu theme="light" width="auto">
+                        <Submenu name="1" v-for ="(nav,index) in navList" :key="index">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
-                                Item 1
+                                {{nav.name}}
                             </template>
                             <MenuItem name="1-1">Option 1</MenuItem>
-                            <MenuItem name="1-2">Option 2</MenuItem>
-                            <MenuItem name="1-3">Option 3</MenuItem>
-                        </Submenu>
-                        <Submenu name="2">
-                            <template slot="title">
-                                <Icon type="ios-keypad"></Icon>
-                                Item 2
-                            </template>
-                            <MenuItem name="2-1">Option 1</MenuItem>
-                            <MenuItem name="2-2">Option 2</MenuItem>
-                        </Submenu>
-                        <Submenu name="3">
-                            <template slot="title">
-                                <Icon type="ios-analytics"></Icon>
-                                Item 3
-                            </template>
-                            <MenuItem name="3-1">Option 1</MenuItem>
-                            <MenuItem name="3-2">Option 2</MenuItem>
+                            <!-- <MenuItem name="1-2">Option 2</MenuItem>
+                            <MenuItem name="1-3">Option 3</MenuItem> -->
                         </Submenu>
                     </Menu>
                 </Sider>
                 <Layout :style="{padding: '0 24px 24px'}">
-                    <Breadcrumb :style="{margin: '24px 0'}">
-                        <BreadcrumbItem>Home</BreadcrumbItem>
-                        <BreadcrumbItem>Components</BreadcrumbItem>
-                        <BreadcrumbItem>Layout</BreadcrumbItem>
-                    </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                         Content
                     </Content>
@@ -78,42 +57,24 @@
 
 
 <script>
+import ajax from '@/api/ajax'
 export default {
     data(){
     return{
-      name:'',
+			list:[],
+			navList:[],
     }
   },
   created(){
-    this.getdata()
-  },
+    this.getdata()   
+	},
   methods:{
     getdata(){
-      var param = {name:"adt_web_getZSKFL"}
-      var bean={bean: JSON.stringify(param)}
-      // this.$http({
-		  //    method:'post',
-		  //    url:'http://192.168.0.151:8060/TWO/restservices/web/adt_webMain/query',
-		  //  	 data:bean
-			// })
-			// .then(response => {
-      //   console.log(111)
-      // })
-      var url = "http://203.91.37.111//TWO/restservices/web/adt_webMain/query"
-      var param = {"name":"adt_web_getZSKFL"}
-      this.$.ajax({ 
-        type: "post", 				 
-        url: url, 
-        data: { bean: JSON.stringify(param)}, 
-        async: false,
-        dataType: "json",
-        success: function(data){
-          console.log(data)
-          this.list = data.result
-          console.log(this.list)
-        }
-      });
-    },
+			let name = 'adt_web_getZSKFL'
+      let data = ajax(name)
+			this.navList = data.result
+			console.log(this.navList)
+	  },
     turnToPage (name) {
         this.$router.push({ path: name });
     },
@@ -122,5 +83,16 @@ export default {
 </script>
 
 <style>
-
+.layout{
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.layout-nav{
+    width: 100%;
+    margin: 0 auto;
+    margin-right: 20px;
+}
 </style>
