@@ -15,6 +15,6 @@ export default new Router({
       path: '/knowledge',
       name: 'knowledge',
       component: () => import('@/components/view/knowledge')
-  },
+    },
   ]
 })

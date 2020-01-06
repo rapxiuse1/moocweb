@@ -33,21 +33,22 @@
             </Header>
             <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu theme="light" width="auto">
-                        <Submenu name="1" v-for ="(nav,index) in navList" :key="index">
-                            <template slot="title">
-                                <Icon type="ios-navigate"></Icon>
-                                {{nav.name}}
-                            </template>
-                            <MenuItem name="1-1">Option 1</MenuItem>
-                            <!-- <MenuItem name="1-2">Option 2</MenuItem>
-                            <MenuItem name="1-3">Option 3</MenuItem> -->
-                        </Submenu>
+                    <Menu theme="light" width="auto" @on-select="inPage">
+                        <MenuItem :name="nav.id"  v-for ="(nav,index) in navList" :key="index">
+                        <Icon type="ios-paper" />
+                        {{nav.name}}
+                        </MenuItem>
                     </Menu>
                 </Sider>
                 <Layout :style="{padding: '0 24px 24px'}">
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                        Content
+                         <!-- <Menu mode="horizontal" theme="light" @on-select="toPage">
+                            <MenuItem :name="liv.id" v-for ="(liv,index) in list" :key="index">
+                                <Icon type="ios-paper" />
+                                {{liv.name}}
+                            </MenuItem>
+                         </Menu> -->
+                          <Table stripe :columns="columns1" :data="data1" ></Table>
                     </Content>
                 </Layout>
             </Layout>
@@ -61,8 +62,63 @@ import ajax from '@/api/ajax'
 export default {
     data(){
     return{
-			list:[],
-			navList:[],
+	    list:[],
+        navList:[],
+        id:[],
+        columns1:[
+            // {title:'序号',
+            //  key:'index',
+            //  render: (h, params) => {
+            //     return h('div', [
+            //         h('Icon', {
+            //           props: {
+            //             type: 'person'
+            //           }
+            //         }),
+            //         h('strong', params.row.name)
+            //     ]);
+            //   }
+            // },
+            {title:'大标题',key:'headline',width:400},
+            {title:'小标题',key:'subtitle',width:400},
+            {title:'所属分类',key:'fl_name',width:100},
+            {title:'创建人',key:'creator',width:80},
+            {title:'创建时间',key:'createtime',width:200},
+						{title:'操作',
+						 key:'handle',
+						 width:200,
+						 render: (h, params) => {
+                return h('div', [
+                    h('Button', {
+                        props: {
+                            type: 'primary',
+                            size: 'small'
+                        },
+                        style: {
+                            marginRight: '5px'
+                        },
+                        on: {
+                            click: () => {
+                                this.show(params.index)
+                            }
+                        }
+                    }, 'View'),
+                    h('Button', {
+                        props: {
+                            type: 'error',
+                            size: 'small'
+                        },
+                        on: {
+                            click: () => {
+                                this.remove(params.index)
+                            }
+                        }
+                    }, 'Delete')
+                ]);
+            }
+					}
+        ],
+        data1:[],
     }
   },
   created(){
@@ -70,14 +126,27 @@ export default {
 	},
   methods:{
     getdata(){
-			let name = 'adt_web_getZSKFL'
+	  let name = 'adt_web_getZSKFL'
       let data = ajax(name)
-			this.navList = data.result
-			console.log(this.navList)
+      this.navList = data.result
+		console.log(this.navList)
 	  },
     turnToPage (name) {
-        this.$router.push({ path: name });
+      this.$router.push({ path: name });
     },
+    inPage(name){
+      console.log(name)
+      let bean = {
+        "id":name
+      }
+      let ename = "adt_web_getZSKInfo"
+      let data = ajax(ename,bean)
+      this.data1 = data.result
+      console.log(this.data1)
+    },
+    toPage(name){
+      console.log(name)
+    }
   }
 }
 </script>
