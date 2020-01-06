@@ -42,13 +42,19 @@
                 </Sider>
                 <Layout :style="{padding: '0 24px 24px'}">
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                         <!-- <Menu mode="horizontal" theme="light" @on-select="toPage">
+                         <Menu mode="horizontal" theme="light" @on-select="toPage">
                             <MenuItem :name="liv.id" v-for ="(liv,index) in list" :key="index">
                                 <Icon type="ios-paper" />
                                 {{liv.name}}
                             </MenuItem>
-                         </Menu> -->
-                          <Table stripe :columns="columns1" :data="data1" ></Table>
+                         </Menu>
+                          <Table stripe width='100%' :columns="columns1" :data="curData"></Table>
+                          <div style="margin: 10px;overflow: hidden">
+                              <div style="float: right;">
+                                  <Page :total="dataCount" :page-size="pageSize" 
+                                  :current="pageCurrent" @on-change="changePage"></Page>
+                              </div>
+                          </div>
                     </Content>
                 </Layout>
             </Layout>
@@ -63,9 +69,12 @@ export default {
     data(){
     return{
 	    list:[],
-        navList:[],
-        id:[],
-        columns1:[
+      navList:[],
+      id:[],
+      pageSize:10,//每页显示多少条
+      dataCount:0,//总条数
+      pageCurrent:1,//当前页
+      columns1:[
             // {title:'序号',
             //  key:'index',
             //  render: (h, params) => {
@@ -79,14 +88,14 @@ export default {
             //     ]);
             //   }
             // },
-            {title:'大标题',key:'headline',width:400},
-            {title:'小标题',key:'subtitle',width:400},
-            {title:'所属分类',key:'fl_name',width:100},
-            {title:'创建人',key:'creator',width:80},
-            {title:'创建时间',key:'createtime',width:200},
+            {title:'大标题',key:'headline',width:350,tooltip:true},
+            {title:'小标题',key:'subtitle',width:350,tooltip:true},
+            {title:'所属分类',key:'fl_name',width:150},
+            {title:'创建人',key:'creator',width:100},
+            {title:'创建时间',key:'createtime',width:220},
 						{title:'操作',
 						 key:'handle',
-						 width:200,
+						 width:210,
 						 render: (h, params) => {
                 return h('div', [
                     h('Button', {
@@ -102,7 +111,21 @@ export default {
                                 this.show(params.index)
                             }
                         }
-                    }, 'View'),
+                    }, '查看'),
+                    h('Button', {
+                        props: {
+                            type: 'warning',
+                            size: 'small'
+                        },
+                        style: {
+                            marginRight: '5px'
+                        },
+                        on: {
+                            click: () => {
+                                this.remove(params.index)
+                            }
+                        }
+                    }, '修改'),
                     h('Button', {
                         props: {
                             type: 'error',
@@ -113,12 +136,16 @@ export default {
                                 this.remove(params.index)
                             }
                         }
-                    }, 'Delete')
+                    }, '删除')
                 ]);
             }
 					}
-        ],
-        data1:[],
+      ],
+      data1:[],
+      curData:[],
+      bean:{},
+      bean1:{},
+      name:' ',
     }
   },
   created(){
@@ -135,17 +162,83 @@ export default {
       this.$router.push({ path: name });
     },
     inPage(name){
-      console.log(name)
-      let bean = {
-        "id":name
+      this.name = name 
+      console.log(this.name)
+      this.bean = {
+        "parentId":this.name
       }
-      let ename = "adt_web_getZSKInfo"
-      let data = ajax(ename,bean)
-      this.data1 = data.result
+      let ename = "adt_web_getZSKFL"
+      let data = ajax(ename,this.bean)
+      this.list = data.result
+      console.log(this.list)
+      this.bean1 = {
+        "id":this.name, 
+        "pagenum":this.pageCurrent, 
+        "size": this.pageSize
+      }
+      let ename1 = "adt_web_getZSKInfo"
+      let data1 = ajax(ename1,this.bean1)
+      this.data1 = data1.result
       console.log(this.data1)
+
+      let ename2 = "adt_web_getZSKCount"
+      let data2 = ajax(ename2,this.bean1)
+      this.dataCount = Number(data2.result[0].count)
+      console.log(data2.result)
+      console.log(this.dataCount)
+
+    //   let _start = ( this.pageCurrent - 1 ) * this.pageSize
+    //   let _end = this.pageCurrent * this.pageSize
+    //   this.curData = this.data1.slice(_start,_end)
+      // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+      if(this.dataCount < this.pageSize){
+          this.curData = this.data1;
+      }else{
+
+         this.curData = this.data1.slice(0,this.pageSize);
+      }
     },
     toPage(name){
-      console.log(name)
+      this.name = name 
+      console.log(this.name)
+      this.bean1 = {
+        "id":this.name, 
+        "pagenum":this.pageCurrent, 
+        "size": this.pageSize
+      }
+      let ename1 = "adt_web_getZSKInfo"
+      let data = ajax(ename1,this.bean1)
+      this.data1 = data.result
+      console.log(this.data1)
+
+      let ename2 = "adt_web_getZSKCount"
+      let data2 = ajax(ename2,this.bean1)
+      this.dataCount = Number(data2.result[0].count)
+      console.log(this.dataCount)
+      // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+      if(this.dataCount < this.pageSize){
+          this.curData = this.data1;
+      }else{
+         this.curData = this.data1.slice(0,this.pageSize);
+      }
+    },
+    changePage (index) {
+        this.pageCurrent = index
+        let name = "adt_web_getZSKInfo"
+        let bean = {
+          "id":this.name, 
+          "pagenum":this.pageCurrent, 
+          "size": this.pageSize
+        }
+        this.data1 = ajax(name,bean).result
+				console.log(this.data1)
+				this.curData = this.data1
+      //  //需要显示开始数据的index,(因为数据是从0开始的，页码是从1开始的，需要-1)
+      //   let _start = (this.pageCurrent - 1) * this.pageSize;
+      //   //需要显示结束数据的index
+      //   let _end = this.pageCurrent * this.pageSize;
+      //   //截取需要显示的数据
+      //   this.curData = this.data1.slice(_start, _end);
     }
   }
 }
