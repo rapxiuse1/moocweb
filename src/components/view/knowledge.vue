@@ -1,8 +1,9 @@
 <template>
    <div class="layout">
-        <Layout>
+        <Layout :style= "{minHeight:'100vh'}">
             <Header>
-                <Menu mode="horizontal" theme="dark" :active-name="1" @on-select="turnToPage">
+                <Menu mode="horizontal" theme="dark" active-name="knowledge" @on-select="turnToPage">
+                    <div class="layout-logo"></div>
                     <div class="layout-nav">
                         <MenuItem name="knowledge">
                             <Icon type="ios-navigate"></Icon>
@@ -40,7 +41,7 @@
                         </MenuItem>
                     </Menu>
                 </Sider>
-                <Layout :style="{padding: '0 24px 24px'}">
+                <Layout>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
                          <Menu mode="horizontal" theme="light" @on-select="toPage">
                             <MenuItem :name="liv.id" v-for ="(liv,index) in list" :key="index">
@@ -48,7 +49,7 @@
                                 {{liv.name}}
                             </MenuItem>
                          </Menu>
-                          <Table stripe width='100%' :columns="columns1" :data="curData"></Table>
+                          <Table stripe width='100%' :columns="columns" :data="curData"></Table>
                           <div style="margin: 10px;overflow: hidden">
                               <div style="float: right;">
                                   <Page :total="dataCount" :page-size="pageSize" 
@@ -58,6 +59,7 @@
                     </Content>
                 </Layout>
             </Layout>
+            <Footer class="layout-footer-center">2020</Footer>
         </Layout>
     </div>
 </template>
@@ -74,78 +76,18 @@ export default {
       pageSize:10,//每页显示多少条
       dataCount:0,//总条数
       pageCurrent:1,//当前页
-      columns1:[
-            // {title:'序号',
-            //  key:'index',
-            //  render: (h, params) => {
-            //     return h('div', [
-            //         h('Icon', {
-            //           props: {
-            //             type: 'person'
-            //           }
-            //         }),
-            //         h('strong', params.row.name)
-            //     ]);
-            //   }
-            // },
-            {title:'大标题',key:'headline',width:350,tooltip:true},
-            {title:'小标题',key:'subtitle',width:350,tooltip:true},
-            {title:'所属分类',key:'fl_name',width:150},
-            {title:'创建人',key:'creator',width:100},
-            {title:'创建时间',key:'createtime',width:220},
-						{title:'操作',
-						 key:'handle',
-						 width:210,
-						 render: (h, params) => {
-                return h('div', [
-                    h('Button', {
-                        props: {
-                            type: 'primary',
-                            size: 'small'
-                        },
-                        style: {
-                            marginRight: '5px'
-                        },
-                        on: {
-                            click: () => {
-                                this.show(params.index)
-                            }
-                        }
-                    }, '查看'),
-                    h('Button', {
-                        props: {
-                            type: 'warning',
-                            size: 'small'
-                        },
-                        style: {
-                            marginRight: '5px'
-                        },
-                        on: {
-                            click: () => {
-                                this.remove(params.index)
-                            }
-                        }
-                    }, '修改'),
-                    h('Button', {
-                        props: {
-                            type: 'error',
-                            size: 'small'
-                        },
-                        on: {
-                            click: () => {
-                                this.remove(params.index)
-                            }
-                        }
-                    }, '删除')
-                ]);
-            }
-					}
+      columns:[
+        {title:'大标题',key:'headline',width:350,tooltip:true},
+        {title:'小标题',key:'subtitle',width:350,tooltip:true},
+        {title:'所属分类',key:'fl_name',width:150},
+        {title:'创建人',key:'creator',width:100},
+        {title:'创建时间',key:'createtime',width:220},
       ],
       data1:[],
       curData:[],
       bean:{},
       bean1:{},
-      name:' ',
+      id:' ',
     }
   },
   created(){
@@ -153,26 +95,44 @@ export default {
 	},
   methods:{
     getdata(){
-	  let name = 'adt_web_getZSKFL'
-      let data = ajax(name)
-      this.navList = data.result
-		console.log(this.navList)
+	    let name = 'adt_web_getZSKFL'
+      this.navList = ajax(name).result
+      console.log(this.navList)
+
+      //初始化获取知识管理全部数据
+      let name2 = 'adt_web_getZSKInfo'
+      this.data1 = ajax(name2).result
+      this.curData = this.data1;
+      //初始化分页判断
+      let name3 = 'adt_web_getZSKCount'
+      this.bean1 = { 
+        "pagenum":this.pageCurrent, 
+        "size": this.pageSize
+      }
+      let data = ajax(name3,this.bean1)
+      this.dataCount = Number(data.result[0].count)
+      console.log(this.dataCount)
+      this.judgPage()
+      // if(this.dataCount < this.pageSize){
+      //     this.curData = this.data1;
+      // }else{
+      //    this.curData = this.data1.slice(0,this.pageSize);
+      // }
 	  },
     turnToPage (name) {
       this.$router.push({ path: name });
     },
     inPage(name){
-      this.name = name 
-      console.log(this.name)
+      this.id = name 
       this.bean = {
-        "parentId":this.name
+        "parentId":this.id
       }
       let ename = "adt_web_getZSKFL"
       let data = ajax(ename,this.bean)
       this.list = data.result
       console.log(this.list)
       this.bean1 = {
-        "id":this.name, 
+        "id":this.id, 
         "pagenum":this.pageCurrent, 
         "size": this.pageSize
       }
@@ -186,23 +146,19 @@ export default {
       this.dataCount = Number(data2.result[0].count)
       console.log(data2.result)
       console.log(this.dataCount)
-
-    //   let _start = ( this.pageCurrent - 1 ) * this.pageSize
-    //   let _end = this.pageCurrent * this.pageSize
-    //   this.curData = this.data1.slice(_start,_end)
-      // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
-      if(this.dataCount < this.pageSize){
-          this.curData = this.data1;
-      }else{
-
-         this.curData = this.data1.slice(0,this.pageSize);
-      }
+      this.judgPage()
+      // // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+      // if(this.dataCount < this.pageSize){
+      //     this.curData = this.data1;
+      // }else{
+      //    this.curData = this.data1.slice(0,this.pageSize);
+      // }
     },
     toPage(name){
-      this.name = name 
-      console.log(this.name)
+      this.id = name 
+      console.log(this.id)
       this.bean1 = {
-        "id":this.name, 
+        "id":this.id, 
         "pagenum":this.pageCurrent, 
         "size": this.pageSize
       }
@@ -215,36 +171,39 @@ export default {
       let data2 = ajax(ename2,this.bean1)
       this.dataCount = Number(data2.result[0].count)
       console.log(this.dataCount)
-      // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+      this.judgPage()
+      // // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+      // if(this.dataCount < this.pageSize){
+      //     this.curData = this.data1;
+      // }else{
+      //    this.curData = this.data1.slice(0,this.pageSize);
+      // }
+    },
+    changePage (index) {
+      this.pageCurrent = index
+      let name = "adt_web_getZSKInfo"
+      let bean = {
+        "id":this.id, 
+        "pagenum":this.pageCurrent, 
+        "size": this.pageSize
+      }
+      this.data1 = ajax(name,bean).result
+			console.log(this.data1)
+			this.curData = this.data1
+    },
+    judgPage(){
+      //初始化显示分页判断，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
       if(this.dataCount < this.pageSize){
           this.curData = this.data1;
       }else{
          this.curData = this.data1.slice(0,this.pageSize);
       }
-    },
-    changePage (index) {
-        this.pageCurrent = index
-        let name = "adt_web_getZSKInfo"
-        let bean = {
-          "id":this.name, 
-          "pagenum":this.pageCurrent, 
-          "size": this.pageSize
-        }
-        this.data1 = ajax(name,bean).result
-				console.log(this.data1)
-				this.curData = this.data1
-      //  //需要显示开始数据的index,(因为数据是从0开始的，页码是从1开始的，需要-1)
-      //   let _start = (this.pageCurrent - 1) * this.pageSize;
-      //   //需要显示结束数据的index
-      //   let _end = this.pageCurrent * this.pageSize;
-      //   //截取需要显示的数据
-      //   this.curData = this.data1.slice(_start, _end);
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .layout{
     border: 1px solid #d7dde4;
     background: #f5f7f9;
@@ -252,9 +211,22 @@ export default {
     border-radius: 4px;
     overflow: hidden;
 }
+.layout-logo{
+    width: 100px;
+    height: 30px;
+    background: #5b6270;
+    border-radius: 3px;
+    float: left;
+    position: relative;
+    top: 15px;
+    left: 20px;
+}
 .layout-nav{
-    width: 100%;
+    width: 700px;
     margin: 0 auto;
-    margin-right: 20px;
+    margin-left: 150px;
+}
+.layout-footer-center{
+    text-align: center;
 }
 </style>
