@@ -7,8 +7,10 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'knowledge',
-      component: () => import('@/components/view/knowledge')
+      redirect:{
+        name:'knowledge'
+      },
+      //component: () => import('@/components/view/knowledge')
     },
     {
       path: '/knowledge',

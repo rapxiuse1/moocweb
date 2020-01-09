@@ -1,9 +1,9 @@
 import $ from 'jQuery'
 export default function ajax (name, bean) {
-    var param = {};
+  var param = {};
 	param.name = name;
 	param.bean = bean;
-    var result = null;
+  var result = null;
 	let baseUrl = 'http://203.91.37.111/TWO/restservices/TwoWeb/adt_restMain/query' //本地用
 	
 	//let baseUrl = location.origin + "/" + location.pathname.split("/")[1] + '/restservices/web/adt_webMain/query'//打包用
@@ -18,7 +18,7 @@ export default function ajax (name, bean) {
 			async: false,
 			dataType: "json",
 			success: function(data){
-                result = data;
+        result = data;
 			}
 		});
 	return result;

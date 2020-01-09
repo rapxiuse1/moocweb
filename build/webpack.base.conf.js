@@ -7,14 +7,15 @@ const vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
   },
+  // externals: {
+  //   'Net': 'Net',
+  //   'Login': 'Login'
+  // },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -78,5 +79,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
+  },
 }
