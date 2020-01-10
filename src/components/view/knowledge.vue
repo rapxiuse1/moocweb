@@ -25,17 +25,17 @@
                         </MenuItem>
                     </div>
                     <div class="login">
-                        <MenuItem name="knowledge">
+                        <MenuItem name="register">
                             <Icon type="ios-navigate"></Icon>
                             注册
                         </MenuItem>
-                         <MenuItem name="knowledge">
+                         <MenuItem name="login">
                             <Icon type="ios-navigate"></Icon>
                             登录
                         </MenuItem>
-                         <MenuItem name="knowledge">
+                         <MenuItem name="findpwd">
                             <Icon type="ios-navigate"></Icon>
-                            登出
+                            找回密码
                         </MenuItem>
                     </div>
                 </Menu>
@@ -115,7 +115,7 @@
               </Content>
             </Layout>
           </Layout>
-          <Footer class="footer">
+          <!-- <Footer class="footer">
             <div class="mid-layout row h">
               <div class="col v-m">
                 <div class="link">
@@ -145,16 +145,15 @@
             <div class="col v-m t-r">             
             </div>
             </div>
-          </Footer>
+          </Footer> -->
         </Layout>
     </div>
 </template>
 
 
 <script>
-import ajax from '@/api/ajax'
+import ajax from '@/utils/ajax'
 import editor from '@/components/editor/editor'
-import Login from 'Login'
 export default {
     data(){
     return{
@@ -231,10 +230,11 @@ export default {
 	  },
     turnToPage (name) {
       console.log(name)
-      if(name ="knowledge"){
+      if(name == "knowledge"){
         this.getdata()
+      }else{
+        this.$router.push({ path: name });
       }
-      this.$router.push({ path: name });
     },
     inPage(name){
       this.id = name 
@@ -311,12 +311,12 @@ export default {
         this.content = ''
         return
       }else{
-        //本地测试路径
-      this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),'http://203.91.37.111' + '/' + 'TWO/')
+      //本地测试路径
+      //this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),'http://203.91.37.111' + '/' + 'TWO/')
       //打包路径
-      //this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
+      this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
       }
-    }
+    },
   },
   components:{
     editor:editor,
@@ -348,7 +348,7 @@ export default {
   margin-left: 150px;
 }
 .login{
-  width: 280px;
+  width: 310px;
   margin: 0 auto;
   margin-right: 0;
 }

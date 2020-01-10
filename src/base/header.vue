@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import ajax from '../api/ajax'
+import ajax from '@/utils/ajax'
 export default {
 	name: 'MoocHeader',
 	components: 'MoocHeader',

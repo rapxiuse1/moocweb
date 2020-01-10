@@ -1,11 +1,10 @@
 import $ from 'jQuery'
-export default function ajax (name, bean) {
+export default function ajax (name, bean, callback) {
   var param = {};
 	param.name = name;
 	param.bean = bean;
-  var result = null;
+  let result = null;
 	let baseUrl = 'http://203.91.37.111/TWO/restservices/TwoWeb/adt_restMain/query' //本地用
-	
 	//let baseUrl = location.origin + "/" + location.pathname.split("/")[1] + '/restservices/web/adt_webMain/query'//打包用
 	if (typeof leapclient == "object") {
 		//平台Net.js封装请求
@@ -21,6 +20,10 @@ export default function ajax (name, bean) {
         result = data;
 			}
 		});
+	}
+	if (callback) {
+		callback(result)
+		return;
+	}
 	return result;
-  }
 }
