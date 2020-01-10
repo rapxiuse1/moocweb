@@ -8,6 +8,7 @@ import router from './router'
 import axios from 'axios'
 import qs from 'qs'
 import $ from 'jQuery'
+import Router from 'vue-router'
 Vue.prototype.$ = $
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs
@@ -17,6 +18,11 @@ Vue.prototype.$Message.config({
   top: 70,
   duration:2
 });
+//路由跳转相同地址报错解决
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 /* eslint-disable no-new */
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限

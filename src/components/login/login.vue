@@ -9,14 +9,6 @@
                 <FormItem label="密码" prop="pass">
                     <Input type="password" v-model="loginData.pass" placeholder="请输入密码"></Input>
                 </FormItem>
-                <!-- <div class="control">
-                  <a href="">找回密码 | </a>
-                  <a href="">注册账号</a>
-                </div> -->
-                <!-- <FormItem label="验证码" prop="code">
-                    <Input type="text" v-model="loginData.code" placeholder="验证码"></Input>
-                    <img id="img_code2">
-                </FormItem> -->
                 <FormItem class="form-footer">
                     <Button type="primary" @click="handleSubmit('loginData')">登录</Button>
                     <Button type="primary" @click="handleReset('loginData')" style="margin-left: 8px">重置</Button>

@@ -1,48 +1,14 @@
 <template>
    <div class="layout">
         <Layout :style= "{minHeight:'100vh'}">
-            <Header>
-                <Menu mode="horizontal" theme="dark" active-name="knowledge" @on-select="turnToPage">
-                    <div class="layout-logo">
-                      <img src="@/assets/logo.png" alt="">
-                    </div>
-                    <div class="layout-nav">
-                        <MenuItem name="knowledge">
-                            <Icon type="ios-navigate"></Icon>
-                            常见问题
-                        </MenuItem>
-                        <MenuItem name="2">
-                            <Icon type="ios-keypad"></Icon>
-                            在线考试
-                        </MenuItem>
-                        <MenuItem name="3">
-                            <Icon type="ios-analytics"></Icon>
-                            问卷调查
-                        </MenuItem>
-                        <MenuItem name="4">
-                            <Icon type="ios-paper"></Icon>
-                            意见反馈
-                        </MenuItem>
-                    </div>
-                    <div class="login">
-                        <MenuItem name="register">
-                            <Icon type="ios-navigate"></Icon>
-                            注册
-                        </MenuItem>
-                         <MenuItem name="login">
-                            <Icon type="ios-navigate"></Icon>
-                            登录
-                        </MenuItem>
-                         <MenuItem name="findpwd">
-                            <Icon type="ios-navigate"></Icon>
-                            找回密码
-                        </MenuItem>
-                    </div>
-                </Menu>
-            </Header>
+          <m-header></m-header>
             <Layout>
               <Sider hide-trigger :style="{background: '#fff'}">
                   <Menu theme="light" width="auto" @on-select="inPage">
+                      <MenuItem name="all">
+                      <Icon type="md-menu"/>
+                      全部
+                      </MenuItem>
                       <MenuItem :name="nav.id"  v-for ="(nav,index) in navList" :key="index">
                       <Icon type="ios-paper" />
                       {{nav.name}}
@@ -60,36 +26,6 @@
                     <Table stripe width='100%' :columns="columns" :data="curData" @on-row-click="editorShow">
                     </Table>
                     <Modal v-model="modalShow" width="1400" footer-hide>
-                      <!-- <div class="LC_form">
-                        <div class="LC_form_box">
-                          <table class="LC_form_tab LC_form_all">
-                            <tbody>
-                              <tr>
-                                <td class="LC_form_tab_th LC_form_tab_td">大标题</td>
-                                <td class="LC_form_tab_td">
-                                  {{this.headline}}
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="LC_form_tab_th LC_form_tab_td">小标题</td>
-                                <td class="LC_form_tab_td">{{this.subtitle}}</td>
-                              </tr>
-                              <tr>
-                                <td class="LC_form_tab_th LC_form_tab_td">正文</td>
-                                <td class="LC_form_tab_td">
-                                  <div v-html= "this.content" style="height:500px;overflow:scroll">
-                                     {{this.content}}
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="LC_form_tab_th LC_form_tab_td">附件</td>
-                                <td class="LC_form_tab_td"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div> -->
                       <div class="message">
                         <div class="tit">
                           <h3>大标题:{{this.headline}}</h3>
@@ -108,52 +44,24 @@
                     </Modal>
                     <div style="margin: 10px;overflow: hidden">
                       <div style="float: right;">
-                          <Page :total="dataCount" :page-size="pageSize" 
-                          :current="pageCurrent" @on-change="changePage"></Page>
+                        <Page :total="dataCount" :page-size="pageSize" 
+                        :current="pageCurrent" @on-change="changePage"></Page>
                       </div>
                     </div>
               </Content>
             </Layout>
           </Layout>
-          <!-- <Footer class="footer">
-            <div class="mid-layout row h">
-              <div class="col v-m">
-                <div class="link">
-                  <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_aboutus">关于我们</a>
-                  <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_socialrecruit">加入我们</a>
-                  <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_cooperative">合作伙伴</a>
-                  <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_contactus">联系我们</a>
-                  <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_question">意见反馈</a>
-                </div>
-                <p class="text icp">
-                  <a style="cursor:none" class="icpfirst" id="showtitle">Copyright 1998-2020永兴元科技版权所有</a>
-                  <a href="http://www.beian.miit.gov.cn/" target="_blank">【粤ICP备】09098678号</a>
-                </p>
-                <div class="link mini">
-                  <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_privacy">隐私声明</a>
-                </div>
-                <ul class="mid-layout net">
-                  <li>
-                    <a target="_blank" href="http://szcert.ebs.org.cn/838369a8-55fe-478a-a4c8-1d3044d087d7"><b>工商网监电子标识</b></a>
-                  </li>
-                  <li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502000200">
-                    <img src="/LONGRISE/LEAP/img/beianbgs.png" alt="">
-                    <b>粤公网安备 44030502000200</b></a>
-                  </li>
-                </ul>
-              </div>
-            <div class="col v-m t-r">             
-            </div>
-            </div>
-          </Footer> -->
+          <m-footer></m-footer>
         </Layout>
     </div>
 </template>
 
 
 <script>
+import MHeader from '@/components/header/header.vue'
+//import MContent from '@/components/content/content.vue'
+import MFooter from '@/components/footer/footer.vue'
 import ajax from '@/utils/ajax'
-import editor from '@/components/editor/editor'
 export default {
     data(){
     return{
@@ -211,7 +119,6 @@ export default {
 	    let name = 'adt_web_getZSKFL'
       this.navList = ajax(name).result
       console.log(this.navList)
-
       //初始化获取知识管理全部数据
       let name2 = 'adt_web_getZSKInfo'
       this.data1 = ajax(name2).result
@@ -228,39 +135,36 @@ export default {
       console.log(this.dataCount)
       this.judgPage()
 	  },
-    turnToPage (name) {
+    inPage(name){
       console.log(name)
-      if(name == "knowledge"){
+      if(name == "all"){
         this.getdata()
       }else{
-        this.$router.push({ path: name });
-      }
-    },
-    inPage(name){
-      this.id = name 
-      this.bean = {
+        this.id = name 
+        this.bean = {
         "parentId":this.id
-      }
-      let ename = "adt_web_getZSKFL"
-      let data = ajax(ename,this.bean)
-      this.list = data.result
-      console.log(this.list)
-      this.bean1 = {
-        "id":this.id, 
-        "pagenum":this.pageCurrent, 
-        "size": this.pageSize
-      }
-      let ename1 = "adt_web_getZSKInfo"
-      let data1 = ajax(ename1,this.bean1)
-      this.data1 = data1.result
-      console.log(this.data1)
+        }
+        let ename = "adt_web_getZSKFL"
+        let data = ajax(ename,this.bean)
+        this.list = data.result
+        console.log(this.list)
+        this.bean1 = {
+          "id":this.id, 
+          "pagenum":this.pageCurrent, 
+          "size": this.pageSize
+        }
+        let ename1 = "adt_web_getZSKInfo"
+        let data1 = ajax(ename1,this.bean1)
+        this.data1 = data1.result
+        console.log(this.data1)
 
-      let ename2 = "adt_web_getZSKCount"
-      let data2 = ajax(ename2,this.bean1)
-      this.dataCount = Number(data2.result[0].count)
-      console.log(data2.result)
-      console.log(this.dataCount)
-      this.judgPage()
+        let ename2 = "adt_web_getZSKCount"
+        let data2 = ajax(ename2,this.bean1)
+        this.dataCount = Number(data2.result[0].count)
+        console.log(data2.result)
+        console.log(this.dataCount)
+        this.judgPage()
+      }
     },
     toPage(name){
       this.id = name 
@@ -319,7 +223,8 @@ export default {
     },
   },
   components:{
-    editor:editor,
+    MFooter,
+    MHeader,
   }
 }
 </script>
@@ -332,7 +237,7 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-.layout-logo{
+/* .layout-logo{
   width: 105px;
   height: 38px;
   background: #5b6270;
@@ -355,136 +260,6 @@ export default {
 .mid{
   width: 1200px;
   margin: 0 auto;
-}
-/* .LC_form{
-  padding-left:5px;
-  padding-right:5px;
-}
-.LC_form_box{
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-}
-.LC_form_tab{
-  border-collapse: collapse;
-  border-spacing: 0;
-  table-layout: fixed;
-  width: 100%;
-  font-size:14px;
-  color: #404040
-}
-.LC_form_tab_td{
-  padding: 5px 10px;
-  height: 30px;
-  vertical-align: middle;
-}
-.LC_form_tab_th{
-  text-align: right;
-  font-weight: normal;
-  font-size: 14px;
-  background: #f3f3f3;
-  width:80px;
-}
-.LC_form_tab_th, .LC_form_tab_td{
-  border: 1px solid #ccc
 } */
-
-.footer{
-  background: #757575;
-  padding:20px 0;
-}
-.message {
-  width: 1200px;
-  margin: 0 auto;
-}
-.tit {
-  font-size: 20px;
-  text-align: center;
-  padding: 10px 0 30px 0;
-}
-.small{
-  margin-top:20px;
-}
-.h {
-    height: 100%;
-}
-.row {
-    display: table;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
-.v-m {
-    vertical-align: middle;
-}
-.col {
-    display: table-cell;
-}
-.link {
-    margin-bottom: 15px;
-}
-.link a:first-child {
-    padding-left: 0;
-    border-left: none;
-}
-.link a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-    padding: 0 1em;
-    border-left: 2px solid #fff;
-    display: inline-block;
-    height: 18px;
-    line-height: 18px;
-    white-space: nowrap;
-}
-.footer .text {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-.footer p {
-    font-size: 16px;
-    color: #cecece;
-    margin: 0;
-}
-.icp a {
-    color: #cecece;
-}
-a {
-    text-decoration: none;
-    cursor: pointer;
-}
-.link.mini a {
-    padding: 0 6px;
-    font-size: 16px;
-    color: #cecece;
-    height: 16px;
-    line-height: 16px;
-    border-color: #cecece;
-}
-.net {
-    font-size: 0;
-}
-.mid-layout {
-    width: 1200px;
-    margin: 0 auto;
-}
-.net li {
-    font-size: 12px;
-    border: 0 solid #cecece;
-    display: inline-block;
-    padding: 2px 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: .3s;
-}
-.net li a {
-    color: #cecece;
-}
-.t-r {
-    text-align: right;
-}
-.footer img {
-    margin-left: 20px;
-}
 
 </style>

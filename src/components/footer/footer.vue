@@ -1,6 +1,6 @@
 <template>
-  <Footer class="footer">
-    <div class="mid-layout row h">
+    <Footer class="footer">
+      <div class="mid-layout row h">
       <div class="col v-m">
         <div class="link">
           <a href="http://www.longrise.com.cn/LONGRISE/longrise_webmap/longrise_aboutus">关于我们</a>
@@ -25,10 +25,10 @@
             <b>粤公网安备 44030502000200</b></a>
           </li>
         </ul>
+       </div>
+        <div class="col v-m t-r">             
+       </div>
       </div>
-    <div class="col v-m t-r">             
-    </div>
-    </div>
     </Footer>
 </template>
 
