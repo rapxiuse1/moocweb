@@ -25,7 +25,7 @@
                    </Menu>
                     <Table stripe width='100%' :columns="columns" :data="curData" @on-row-click="editorShow">
                     </Table>
-                    <Modal v-model="modalShow" width="1400" footer-hide>
+                    <!-- <Modal v-model="modalShow" width="1400" footer-hide>
                       <div class="message">
                         <div class="tit">
                           <h3>大标题:{{this.headline}}</h3>
@@ -41,7 +41,7 @@
                           <h3>附件:</h3>
                         </div>
                       </div>
-                    </Modal>
+                    </Modal> -->
                     <div style="margin: 10px;overflow: hidden">
                       <div style="float: right;">
                         <Page :total="dataCount" :page-size="pageSize" 
@@ -59,7 +59,6 @@
 
 <script>
 import MHeader from '@/components/header/header.vue'
-//import MContent from '@/components/content/content.vue'
 import MFooter from '@/components/footer/footer.vue'
 import ajax from '@/utils/ajax'
 export default {
@@ -206,20 +205,21 @@ export default {
       }
     },
     editorShow(columns){
-      this.headline = columns.headline
-      this.subtitle = columns.subtitle
-      this.modalShow = !this.modalShow
-      this.attachment = columns.attachment
-      console.log(this.attachment)
+      console.log(columns)
+      //this.headline = columns.headline
+      //this.subtitle = columns.subtitle
+      //this.modalShow = !this.modalShow
+      //this.attachment = columns.attachment
+      //console.log(this.attachment)
       if(!columns.content){
         this.content = ''
-        return
       }else{
       //本地测试路径
-      //this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),'http://203.91.37.111' + '/' + 'TWO/')
+      columns.content = columns.content.replace(new RegExp("@serveruirl@","gm"),'http://203.91.37.111' + '/' + 'TWO/')
       //打包路径
-      this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
+      //this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
       }
+      this.$router.push({path:'/detail',query:{headline:columns.headline,subtitle:columns.subtitle,content:columns.content}})
     },
   },
   components:{

@@ -35,8 +35,8 @@
      </Menu>
      <Modal v-model="modalShow" width="450" footer-hide>
       <div class="login-main">
-        <Tabs value="name1">
-          <TabPane label="登录" name="name1">
+        <Tabs :value="loginreg">
+          <TabPane label="登录" name="login">
             <Form ref="loginData1" :model="loginData1" :label-width="60">
                 <FormItem label="用户名" prop="acct">
                     <Input type="text" v-model="loginData1.acct" placeholder="请输入账号" style="width: 260px"></Input>
@@ -56,8 +56,12 @@
                   </div>
                 </div>
                 <Button class="form-footer" type="primary" long @click="handleSubmit('loginData1')">登录</Button>
+                <div class="privacy_tip">
+                  登录即同意
+                  <a @click="privacy">使用协议</a>
+                </div>
           </TabPane>
-          <TabPane label="注册" name="name2">
+          <TabPane label="注册" name="register">
             <Form ref="loginData2" :model="loginData2"  :label-width="60">
               <FormItem label="用户名" prop="acct">
                   <Input type="text" v-model="loginData2.acct" placeholder="请输入您的用户名" style="width: 260px"></Input>
@@ -102,11 +106,15 @@ export default {
         cardno:'',
       },
       resultdesc:'',
+      loginreg:'',
     }
   },
   methods:{
     turnToPage(name){
-      if(name == "register"||"login"){
+      console.log(name)
+      if(name == "register"|| name == "login"){
+        this.loginreg = name
+        console.log(this.loginreg)
         let basePath = "http://203.91.37.111/TWO"
         //let basePath = location.origin + "/" + location.pathname.split("/")[1]+'/' //打包用
         this.login = new Login({
@@ -159,6 +167,9 @@ export default {
     },
     findpwd(){
       this.$router.push('findpwd')
+    },
+    privacy(){
+      this.$router.push('privacy')
     }
   }
 }
@@ -186,11 +197,21 @@ export default {
   margin-right: 0;
 }
 .control{
-  height: 100px;
+  height: 60px;
 }
 .control-a{
   float: right;
   margin-right: 90px;
+}
+.privacy_tip{
+  font-size: 12px;
+  color: #717a84;
+  text-align: center;
+  margin-top: 20px;
+}
+.privacy_tip a:visited {
+  font-size: 12px;
+  color: #37f;
 }
 .form-footer{
   display: block;

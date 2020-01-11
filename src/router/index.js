@@ -25,6 +25,16 @@ export default new Router({
       component: () => import('@/components/view/knowledge')
     },
     {
+      path: '/detail',
+      name: 'detail',
+      component: () => import('@/components/view/detail')
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: () => import('@/components/view/privacy')
+    },
+    {
       path: '/findpwd',
       name: 'findpwd',
       component: () => import('@/components/login/findpwd')
