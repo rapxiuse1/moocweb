@@ -57,8 +57,8 @@ export default {
     alert(data) {
       console.log(data)
       if(data.result == true){
-        this.$Message.info('密码找回成功') 
-        this.$router.push('login') 
+        this.$Message.info(data.resultdesc) 
+        this.$router.push('knowledge') 
       }else{
         this.$Message.info(data.resultdesc)
       }
@@ -77,40 +77,35 @@ export default {
 </script>
 
 <style scoped>
-html,body {
-    width: 100%;
-    height: 100%;
-    background-color: #515A6E;
-}
 .login {
-    width: 100%;
-    height: 100%;
-    background-color: #515A6E;
-    position: relative;
+  width: 100%;
+  height: 800px;
+  background-color: #515A6E;
+  position: relative;
 }
 .login .from-wrap{
-    position: fixed;
-    left: 50%;
-    margin-left: -200px;
-    top: 50%;
-    margin-top: -150px;
-    width: 420px;
-    height: 300px;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 20px 30px;
+  position: fixed;
+  left: 50%;
+  margin-left: -200px;
+  top: 50%;
+  margin-top: -150px;
+  width: 420px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px 30px;
 }
 .login h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 .login FormItem {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 .login .form-footer {
-    text-align: right;
+  text-align: right;
 }
 .ivu-form-item-required .ivu-form-item-label:before {
-    display: none;
+  display: none;
 }
 </style>

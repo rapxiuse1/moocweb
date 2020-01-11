@@ -24,5 +24,10 @@ export default new Router({
       name: 'knowledge',
       component: () => import('@/components/view/knowledge')
     },
+    {
+      path: '/findpwd',
+      name: 'findpwd',
+      component: () => import('@/components/login/findpwd')
+    },
   ]
 })

@@ -51,7 +51,7 @@
             </Form>
                 <div class="control">
                   <div class="control-a">
-                    <a href="">找回密码 | </a>
+                    <a @click="findpwd">找回密码 | </a>
                     <a @click="handleReset('loginData1')">重置</a>
                   </div>
                 </div>
@@ -156,6 +156,9 @@ export default {
     },
     handleReset (name) {
       this.$refs[name].resetFields();
+    },
+    findpwd(){
+      this.$router.push('findpwd')
     }
   }
 }
