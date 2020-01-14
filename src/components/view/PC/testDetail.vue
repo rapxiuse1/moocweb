@@ -23,9 +23,7 @@
 					<p>注意事项：{{array.announcements}}</p>
 				</div>
 				<div class="but">
-					<router-link :to="{name:'question',query:{id:array.paper_id,title:array.title,userId:this.userId,examId:this.examId}}">
-          <input type="button" name="" id="" value="开始做题" />
-          </router-link>
+          	<router-link :to="{name:'question',query:{id:array.paper_id,title:array.title,userId:this.userId,examId:this.examId}}"><input type="button" name="" id="" value="开始做题" /></router-link>
 				</div>
 			</div>
     </Content>
@@ -64,7 +62,10 @@ export default {
   methods:{
     getUrlKey(name){
       return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
-    }
+    },
+    // doquestion(){
+    //   this.$router.push({path:'/question',query:{id:array.paper_id,title:array.title,userId:this.userId,examId:this.examId}})
+    // }
   },
   components:{
     MFooter,

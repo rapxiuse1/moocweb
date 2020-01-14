@@ -40,5 +40,10 @@ export default new Router({
       name: 'testDetail',
       component: () => import('@/components/view/PC/testDetail')
     },
+    {
+      path: '/question',
+      name: 'question',
+      component: () => import('@/components/view/PC/question')
+    },
   ]
 })

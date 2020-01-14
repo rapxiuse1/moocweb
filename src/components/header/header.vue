@@ -117,8 +117,8 @@ export default {
       if(name == "register"|| name == "login"){
         this.loginreg = name
         console.log(this.loginreg)
-        let basePath = "http://203.91.37.111/TWO"
-        //let basePath = location.origin + "/" + location.pathname.split("/")[1]+'/' //打包用
+        //let basePath = "http://203.91.37.111/TWO"//本地用
+        let basePath = location.origin + "/" + location.pathname.split("/")[1]+'/' //打包用
         this.login = new Login({
           check: false, 
           basePath: basePath, 

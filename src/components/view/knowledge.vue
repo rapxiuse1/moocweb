@@ -193,9 +193,9 @@ export default {
         this.content = ''
       }else{
       //本地测试路径
-      columns.content = columns.content.replace(new RegExp("@serveruirl@","gm"),'http://203.91.37.111' + '/' + 'TWO/')
+      //columns.content = columns.content.replace(new RegExp("@serveruirl@","gm"),'http://203.91.37.111' + '/' + 'TWO/')
       //打包路径
-      //this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
+      this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
       }
       this.$router.push({path:'/detail',query:{headline:columns.headline,subtitle:columns.subtitle,content:columns.content}})
     },
