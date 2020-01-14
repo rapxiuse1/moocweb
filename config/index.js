@@ -18,6 +18,14 @@ module.exports = {
       //     '^/api': ''
       //   }
       // }
+
+      '/MCA': {  
+      target:'http://203.91.37.111',
+      changeOrigin: true,  //是否跨域
+      pathRewrite: {
+        '^/MCA': '/MCA'   
+        }              
+      }
     },
 
     // Various Dev Server settings

@@ -1,6 +1,6 @@
 <template>
     <Header>
-      <Menu mode="horizontal" theme="dark" active-name="knowledge" @on-select="turnToPage">
+      <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage">
         <div class="layout-logo">
           <img src="@/assets/logo.png" alt="">
         </div>
@@ -9,7 +9,7 @@
                 <Icon type="ios-navigate"></Icon>
                 常见问题
             </MenuItem>
-            <MenuItem name="2">
+            <MenuItem name="onlinetest">
                 <Icon type="ios-keypad"></Icon>
                 在线考试
             </MenuItem>
@@ -46,7 +46,9 @@
                 </FormItem>
                 <FormItem label="验证码" prop="code">
                     <Input type="text" v-model="loginData1.code" placeholder="验证码" style="width: 260px"></Input>
-                    <img id="img_code2" :style="{width:'80px',}">
+                    <div class="code">
+                      <img id="img_code2" :style="{width:'80px',}">
+                    </div>
                 </FormItem>
             </Form>
                 <div class="control">
@@ -195,6 +197,14 @@ export default {
   width: 310px;
   margin: 0 auto;
   margin-right: 0;
+}
+.code {
+  width: 83px;
+  height: 27px;
+  border: 1px solid #ccc;
+  float: right;
+  border-radius: 2px;
+  margin-top:3px;
 }
 .control{
   height: 60px;

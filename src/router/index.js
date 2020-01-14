@@ -5,15 +5,6 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   redirect:{
-    //     name:'knowledge'
-    //   },
-    //   meta:{
-    //     requireAuth:true,
-    //   }
-    // },
     {
       path: '/',
       name: 'knowledge',
@@ -38,6 +29,16 @@ export default new Router({
       path: '/findpwd',
       name: 'findpwd',
       component: () => import('@/components/login/findpwd')
+    },
+    {
+      path: '/onlinetest',
+      name: 'onlinetest',
+      component: () => import('@/components/view/PC/onlinetest')
+    },
+    {
+      path: '/testDetail',
+      name: 'testDetail',
+      component: () => import('@/components/view/PC/testDetail')
     },
   ]
 })

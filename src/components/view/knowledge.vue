@@ -23,25 +23,8 @@
                           {{liv.name}}
                       </MenuItem>
                    </Menu>
-                    <Table stripe width='100%' :columns="columns" :data="curData" @on-row-click="editorShow">
+                    <Table stripe width='100%' :columns="columns" :data="curData" @on-row-click="detailShow">
                     </Table>
-                    <!-- <Modal v-model="modalShow" width="1400" footer-hide>
-                      <div class="message">
-                        <div class="tit">
-                          <h3>大标题:{{this.headline}}</h3>
-                          <h5 class="small">小标题:{{this.subtitle}}</h5>
-                        </div>
-                        <div class="content">
-                          <h3>正文:</h3>
-                          <div v-html= "this.content" style="height:500px;overflow:auto">
-                            {{this.content}}
-                          </div>
-                        </div>
-                        <div class="file" style="height:100px;width:100%">
-                          <h3>附件:</h3>
-                        </div>
-                      </div>
-                    </Modal> -->
                     <div style="margin: 10px;overflow: hidden">
                       <div style="float: right;">
                         <Page :total="dataCount" :page-size="pageSize" 
@@ -204,13 +187,8 @@ export default {
          this.curData = this.data1.slice(0,this.pageSize);
       }
     },
-    editorShow(columns){
+    detailShow(columns){
       console.log(columns)
-      //this.headline = columns.headline
-      //this.subtitle = columns.subtitle
-      //this.modalShow = !this.modalShow
-      //this.attachment = columns.attachment
-      //console.log(this.attachment)
       if(!columns.content){
         this.content = ''
       }else{
@@ -237,29 +215,4 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-/* .layout-logo{
-  width: 105px;
-  height: 38px;
-  background: #5b6270;
-  border-radius: 3px;
-  float: left;
-  position: relative;
-  top: 12px;
-  left: 20px;
-}
-.layout-nav{
-  width: 700px;
-  margin: 0 auto;
-  margin-left: 150px;
-}
-.login{
-  width: 310px;
-  margin: 0 auto;
-  margin-right: 0;
-}
-.mid{
-  width: 1200px;
-  margin: 0 auto;
-} */
-
 </style>

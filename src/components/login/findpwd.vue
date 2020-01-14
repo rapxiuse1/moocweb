@@ -23,6 +23,7 @@
 <script>
 import $ from 'jQuery'
 import ajax from '@/utils/ajax'
+import MFooter from '@/components/footer/footer.vue'
 export default {
     data () {
     return {
@@ -71,6 +72,9 @@ export default {
         cardno: this.loginData.cardno,
       })
     },
+  },
+  components:{
+    MFooter,
   }
 }
 
