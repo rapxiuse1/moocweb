@@ -35,7 +35,8 @@
 <script>
 import MHeader from '@/components/header/header.vue'
 import MFooter from '@/components/footer/footer.vue'
-import axios from '@/utils/axios'
+//import axios from '@/utils/axios'
+import ajax from '@/utils/ajax'
 export default {
 	data() {
 		return {
@@ -45,27 +46,31 @@ export default {
 		}
   },
   mounted(){
+    // console.log('111')
     this.examId = this.getUrlKey('examId')
     this.userId = this.getUrlKey('userId')
     console.log(this.examId)
+    console.log(this.userId)
     let name = 'selectExamById'
-    let arg = {}
-    arg.id = this.examId
-    let bean = arg
-    axios(name,bean).then((res) =>{
-      console.log(res.result)
-      this.array = res.result
-    }).catch(function (error) {
-      console.log(error)
-    });
+    let bean = {
+      'id':this.examId
+    }
+    console.log(bean)
+    let data =ajax(name,bean)
+    console.log(data)
+    this.array = data.result
+    console.log(this.array)
+    // axios(name,bean).then((res) =>{
+    //   console.log(res.result)
+    //   this.array = res.result
+    // }).catch(function (error) {
+    //   console.log(error)
+    // });
   },
   methods:{
     getUrlKey(name){
       return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
     },
-    // doquestion(){
-    //   this.$router.push({path:'/question',query:{id:array.paper_id,title:array.title,userId:this.userId,examId:this.examId}})
-    // }
   },
   components:{
     MFooter,

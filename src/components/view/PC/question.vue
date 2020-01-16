@@ -29,7 +29,7 @@
       <div class="que-con que-conup" v-for="(item, index) in array" :key="index">
         <div class="que-type" :class="{active:index==ins}">
           <span class="que-num">
-            <i style="color: #666;"></i>{{index+1}}</i>/{{array.length}}</span>
+            <i style="color: #666;"></i>{{index+1}}/{{array.length}}</span>
           <span v-if="item.question_type == '1'">[单选题] </span>
           <span v-if="item.question_type == '2'">[多选题] </span>
           <span v-if="item.question_type == '3'">[填空题] </span>
@@ -38,10 +38,10 @@
         </div>
         <!--单选-->
         <dl v-if="item.question_type == '1'" class="type-A" :class="{active:index==ins}">
-          <dt>{{index+1}}、
+          <dt>
             <span v-html="item.question"></span>
           </dt>
-          <dd v-for="(items, i) in item.question_item" @click="onDanXuan(i,index)" :class="{cur:items.flag}">
+          <dd v-for="(items, i) in item.question_item" @click="onDanXuan(i,index)" :class="{cur:items.flag}" :key="i">
             <span class="icons"></span>
             <input class="checkBox" value="" name="A1" type="checkbox" />{{items.itemname}}
           </dd>
@@ -49,10 +49,10 @@
 
         <!--多选-->
         <dl v-if="item.question_type == '2'" class="type-A" :class="{active:index==ins}">
-          <dt>{{index+1}}、
+          <dt>
             <span v-html="item.question"></span>
           </dt>
-          <dd v-for="(items, i) in item.question_item" @click="onDuoXuan(i,index,items)" :class="{cur:items.flag == true}">
+          <dd v-for="(items, i) in item.question_item" @click="onDuoXuan(i,index,items)" :class="{cur:items.flag == true}" :key="i">
             <span class="icons"></span>
             <input class="checkBox" value="" name="A1" type="checkbox" />{{items.itemname}}
           </dd>
@@ -60,7 +60,7 @@
 
         <!--问答-->
         <dl v-if="item.question_type == '5'" class="type-C" :class="{active:index==ins}">
-          <dt>{{index+1}}、
+          <dt>
             <span v-html="item.question"></span>
           </dt>
           <dd>
@@ -70,7 +70,7 @@
 
         <!--填空-->
         <dl v-if="item.question_type == '3'" class="type-C" :class="{active:index==ins}">
-          <dt>{{index+1}}、
+          <dt>
             <span v-html="item.question"></span>
           </dt>
           <dd>
@@ -83,8 +83,7 @@
         <input @click="nextOne(ins)" class="next-one" type="button" name="" id="" value="下一题" />
         <input class="next-sub" @click="flag=true" type="button" name="" id="" value="提前交卷" />
       </div>
-
-      <div class="que-but but" v-else="array!=null && this.ins == array.length-1">
+      <div class="que-but but" v-else>
         <input class="next-one" @click="sumbit" type="button" name="" id="" value="交卷" />
       </div>
 
@@ -106,7 +105,7 @@
 <script>
 import MHeader from '@/components/header/header.vue'
 import MFooter from '@/components/footer/footer.vue'
-import axios from '@/utils/axios'
+import ajax from '@/utils/ajax'
 export default {
   data() {
     return {
@@ -131,19 +130,25 @@ export default {
   },
   mounted() {
     console.log();
-    let arg = {};
-    arg.id = this.$route.query.id;
+    let arg = {}
+    arg.id = '08b65b9a64ea4af3bb0d7d5979d647c3'
+    let bean =arg
     let name = "selectRefQuestionById";
-    let bean = arg;
-    axios(name,bean).then((response) =>{
-      console.log(response.result)
-      this.array = response.result
-      for (let x = 0; x < this.array.length; x++) {
-        this.array[x].userAnswer = "";
-      }
-    }).catch(function (error) {
-      console.log(error)
-    });
+    console.log(arg)
+    this.array = ajax(name,bean).result
+    console.log(this.array)
+    for (let x = 0; x < this.array.length; x++) {
+      this.array[x].userAnswer = "";
+    } 
+    // axios(name,bean).then((response) =>{
+    //   console.log(response.result)
+    //   this.array = response.result
+    //   for (let x = 0; x < this.array.length; x++) {
+    //     this.array[x].userAnswer = "";
+    //   }
+    // }).catch(function (error) {
+    //   console.log(error)
+    // });
   },
   methods: {
     // 时间计算
@@ -231,43 +236,38 @@ export default {
       //查询是否已经考过试了
       let name ='selectUserAnswer'
       let bean = arg;
-      axios(name,bean).then((response) =>{
-        console.log(response.data);
-          if (response.data.resultstate == 0) {
-            //提交试卷
-            let answerList = [];
-            for (let x = 0; x < this.array.length; x++) {
-              let jsonBean = {
-                id: this.array[x].id,
-                orderid: this.array[x].orderid,
-                answer: this.array[x].userAnswer,
-                score: this.array[x].score
-              };
-              answerList.push(jsonBean);
-            }
-            arg.answerList = answerList;
-            let arg1 = {};
-            let name1 = "getPaperGrade";
-            let bean1 = arg;
-            axios(name1,bean1).then((response) =>{
-              this.answerJX = response.data.result;
-                this.$router.push({
-                  name: "score",
-                  query: {
-                    answerList: this.answerJX,
-                    title: this.$route.query.title
-                  }
-                });   
-              }).catch(function (error) {
-                console.log(error)
-              });
-        }else {
-          this.flag = false;
-          alert(response.data.resultdesc);
+      let data =ajax(name,bean)
+      console.log(data)
+      if(data.resultstate == 0){
+        //提交试卷
+        let answerList = []
+        for(let x= 0; x<this.array.length; x++){
+          let jsonBean = {
+            id: this.array[x].id,
+            orderid: this.array[x].orderid,
+            answer: this.array[x].userAnswer,
+            score: this.array[x].score
+          };
+          answerList.push(jsonBean);
         }
-      }).catch(function (error) {
-      console.log(error)
-      })
+        arg.answerList = answerList;
+        console.log(arg)
+        let name1 = "getPaperGrade";
+        let bean1 = arg;
+        let data1 = ajax(name1,bean1)
+        console.log(data1)
+        this.answerJX = data1.result
+        this.$router.push({
+          name: "score",
+          query: {
+            answerList: this.answerJX,
+            title: this.$route.query.title
+          }
+        });   
+      }else {
+        this.flag = false;
+        alert(data.resultdesc);
+      }
     },
   },
   components:{
@@ -277,6 +277,7 @@ export default {
 }
 </script>
 <style scoped>
+li{list-style:none;}
 .layout{
   border: 1px solid #d7dde4;
   background: #f5f7f9;
@@ -312,10 +313,10 @@ border-radius: 3px;overflow: hidden;width: 1000px;}
 .que-conup dd.cur .icons:before{
 	content: "√";
 	color: #fff;
-	font-size: 14px;
-	line-height: 14px;
-	width: 14px;
-	height: 14px;
+	font-size: 11px;
+	line-height: 16px;
+	width: 11px;
+	height: 11px;
 	text-align: center;
 	position: absolute;
 	left: 0;top: 0;
@@ -343,6 +344,7 @@ position: relative;}
 	text-align: center; height: 40px;line-height: 40px;float: left;margin-left: 10px;}
 .que-card ul li.up{color: #59b59c;}
 .que-card ul li:hover,.que-card ul li.cur{display: block;background: #59b59c;color: #fff;cursor: pointer;}
+
 .shade_box{position: fixed;top: 0;left: 0;bottom: 0;right: 0;z-index: 1000;background: rgba(0, 0, 0, 0.6)}
 .shade_box_w{width: 630px;overflow: hidden;background: #f0f0f0;margin: 250px auto;border-radius: 4px}
 .shade_box .pop-title{padding: 15px 20px;overflow: hidden;}
@@ -350,4 +352,7 @@ position: relative;}
 .shade_box_w p{padding:50px 100px;text-align: center;font-size: 16px;background: #fff;line-height: 30px}
 .shade_box .que-but input{margin-top: 20px;margin-bottom: 20px}
 .shade_box .que-but input.gray{background: #bbb}
+.but input{width: 130px;margin: 0 auto;display: block;color: #fff;font-size: 14px;border-radius: 3px;    text-align: center;
+padding: 10px 0;background: #ff6000;border: #009F95;margin-bottom: 30px;margin-right: 10px;}
+.but input:hover{cursor: pointer;}
 </style>

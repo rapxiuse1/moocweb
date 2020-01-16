@@ -21,7 +21,7 @@
             <a target="_blank" href="http://szcert.ebs.org.cn/838369a8-55fe-478a-a4c8-1d3044d087d7"><b>工商网监电子标识</b></a>
           </li>
           <li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502000200">
-            <img src="/LONGRISE/LEAP/img/beianbgs.png" alt="">
+            <img src="" alt="">
             <b>粤公网安备 44030502000200</b></a>
           </li>
         </ul>

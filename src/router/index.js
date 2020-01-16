@@ -45,5 +45,10 @@ export default new Router({
       name: 'question',
       component: () => import('@/components/view/PC/question')
     },
+    {
+      path: '/score',
+      name: 'score',
+      component: () => import('@/components/view/PC/score')
+    },
   ]
 })
