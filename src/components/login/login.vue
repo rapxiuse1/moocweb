@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import $ from 'jQuery'
 import ajax from '@/utils/ajax'
 export default {
   data () {
@@ -33,11 +32,9 @@ export default {
     }
   },
   mounted() {
-    let basePath = "http://203.91.37.111/TWO"
-    //let basePath = location.origin + "/" + location.pathname.split("/")[1]+'/' //打包用
     this.login = new Login({
         check: false, 
-        basePath: basePath, 
+        basePath: this.global_.loginUrl, 
         dealResult: false
     });
     console.log(this.login)
@@ -53,8 +50,14 @@ export default {
   }, 
   methods: {
     alert(data) {
-      console.log(data.result)
-      if(data.result == true){
+      console.log(data.result.username)
+      if(data.result){
+        sessionStorage.setItem("userName",data.result.username)
+        //this.$store.dispatch("setUser",data.result.username)
+        //console.log(this.$store.state.isLogin)
+        let name ='adt_web_userInfo'
+        let data1 = ajax(name)
+        console.log(data1)
         this.$router.push('knowledge')
       }else{
         this.$Message.info(data.resultdesc)

@@ -8,7 +8,10 @@ export default new Router({
     {
       path: '/',
       name: 'knowledge',
-      component: () => import('@/components/view/knowledge')
+      component: () => import('@/components/view/knowledge'),
+      meta: {
+        requireAuth: true,
+      }
     },
     {
       path: '/knowledge',
@@ -29,6 +32,11 @@ export default new Router({
       path: '/findpwd',
       name: 'findpwd',
       component: () => import('@/components/login/findpwd')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login/login')
     },
     {
       path: '/onlinetest',

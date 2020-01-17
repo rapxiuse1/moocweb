@@ -44,11 +44,9 @@ export default {
   },
 
   mounted() {
-    //let basePath = "http://203.91.37.111/TWO"
-    let basePath = location.origin + "/" + location.pathname.split("/")[1]+'/' //打包用
     this.login = new Login({
         check: false, 
-        basePath: basePath, 
+        basePath: this.global_.loginUrl, 
         dealResult: false
     });
     console.log(this.login)

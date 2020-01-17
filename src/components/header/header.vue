@@ -27,9 +27,13 @@
                 <Icon type="ios-navigate"></Icon>
                 注册
             </MenuItem>
-             <MenuItem name="login">
+            <MenuItem name="login">
                 <Icon type="ios-navigate"></Icon>
                 登录
+            </MenuItem>
+            <MenuItem name="logout">
+                <Icon type="ios-navigate"></Icon>
+                登出
             </MenuItem>
         </div>
      </Menu>
@@ -86,6 +90,9 @@
         </Tabs>
       </div>
      </Modal>
+     <Modal v-model="outShow" width="330" @on-ok="ok" @on-cancel="cancel">
+       <p>确定退出登录吗?</p>
+     </Modal>
     </Header>
 </template>
 
@@ -95,6 +102,7 @@ export default {
   data(){
     return{
       modalShow:false,
+      outShow:false,
       loginData1: {
         acct:'',
         pass:'',
@@ -117,11 +125,10 @@ export default {
       if(name == "register"|| name == "login"){
         this.loginreg = name
         console.log(this.loginreg)
-        let basePath = "http://203.91.37.111/TWO"//本地用
-        //let basePath = location.origin + "/" + location.pathname.split("/")[1]+'/' //打包用
+        console.log(this.global_.loginUrl)
         this.login = new Login({
           check: false, 
-          basePath: basePath, 
+          basePath: this.global_.loginUrl, 
           dealResult: false
         });
         console.log(this.login)
@@ -135,6 +142,9 @@ export default {
           })
         })
         this.modalShow = !this.modalShow
+        return
+      }else if(name == 'logout'){
+        this.outShow = !this.outShow
         return
       }
       this.$router.push({ path: name });
@@ -172,6 +182,16 @@ export default {
     },
     privacy(){
       this.$router.push('privacy')
+    },
+    ok(){
+      sessionStorage.setItem("userName",null)
+      let name = 'adt_web_logout'
+      let data = ajax(name)
+      console.log(data)
+      this.$router.push('login');
+    },
+    cancel(){
+      console.log('点击关闭')
     }
   }
 }

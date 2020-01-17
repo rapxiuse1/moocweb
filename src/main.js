@@ -9,9 +9,12 @@ import axios from 'axios'
 import qs from 'qs'
 import $ from 'jQuery'
 import Router from 'vue-router'
+import store from './store'
+import global from '@/components/global'
 Vue.prototype.$ = $
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs
+Vue.prototype.global_ = global
 Vue.config.productionTip = false
 Vue.use(ViewUI)
 Vue.prototype.$Message.config({
@@ -24,24 +27,28 @@ Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 /* eslint-disable no-new */
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
-//     if (sessionStorage.userName!='') { // 判断缓存里面是否有 userName  //在登录的时候设置它的值
-//       next();
-//     }else {
-//       next({
-//         path: '/login',
-//         query: {
-//             redirect: to.fullPath
-//         } // 将跳转的路由path作为参数，登录成功后跳转到该路由
-//       })
-//     }
-//   }else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireAuth)) {
+     // 判断该路由是否需要登录权限
+     let userName = sessionStorage.getItem("userName")
+     console.log(userName)
+    if (userName) { // 判断缓存里面是否有 userName  //在登录的时候设置它的值
+      next();
+    }else {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        } // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  }else {
+    next();
+  }
+});
 new Vue({
   el: '#app',
-  router: router,
+  router,
+  store,
   render: h => h(App)
 });

@@ -129,9 +129,8 @@ export default {
     clearInterval(this.timer);
   },
   mounted() {
-    console.log();
     let arg = {}
-    arg.id = '08b65b9a64ea4af3bb0d7d5979d647c3'
+    arg.id = this.$route.query.id
     let bean =arg
     let name = "selectRefQuestionById";
     console.log(arg)
@@ -140,15 +139,6 @@ export default {
     for (let x = 0; x < this.array.length; x++) {
       this.array[x].userAnswer = "";
     } 
-    // axios(name,bean).then((response) =>{
-    //   console.log(response.result)
-    //   this.array = response.result
-    //   for (let x = 0; x < this.array.length; x++) {
-    //     this.array[x].userAnswer = "";
-    //   }
-    // }).catch(function (error) {
-    //   console.log(error)
-    // });
   },
   methods: {
     // 时间计算
