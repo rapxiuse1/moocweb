@@ -9,54 +9,90 @@ export default new Router({
       path: '/',
       name: 'knowledge',
       component: () => import('@/components/view/knowledge'),
+    },
+    {
+      path: '/knowledge',//首页、常见问题
+      name: 'knowledge',
+      component: () => import('@/components/view/knowledge')
+    },
+    {
+      path: '/detail',//常见问题明细
+      name: 'detail',
+      component: () => import('@/components/view/detail')
+    },
+    {
+      path: '/privacy',//用户协议
+      name: 'privacy',
+      component: () => import('@/components/view/privacy')
+    },
+    {
+      path: '/findpwd',//密码找回
+      name: 'findpwd',
+      component: () => import('@/components/login/findpwd')
+    },
+    {
+      path: '/login',//初始登录页面
+      name: 'login',
+      component: () => import('@/components/login/login')
+    },
+    {
+      path: '/onlinetest',//在线考试
+      name: 'onlinetest',
+      component: () => import('@/components/view/PC/onlinetest'),
       meta: {
         requireAuth: true,
       }
     },
     {
-      path: '/knowledge',
-      name: 'knowledge',
-      component: () => import('@/components/view/knowledge')
-    },
-    {
-      path: '/detail',
-      name: 'detail',
-      component: () => import('@/components/view/detail')
-    },
-    {
-      path: '/privacy',
-      name: 'privacy',
-      component: () => import('@/components/view/privacy')
-    },
-    {
-      path: '/findpwd',
-      name: 'findpwd',
-      component: () => import('@/components/login/findpwd')
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/components/login/login')
-    },
-    {
-      path: '/onlinetest',
-      name: 'onlinetest',
-      component: () => import('@/components/view/PC/onlinetest')
-    },
-    {
-      path: '/testDetail',
+      path: '/testDetail',//试卷详情
       name: 'testDetail',
       component: () => import('@/components/view/PC/testDetail')
     },
     {
-      path: '/question',
+      path: '/question',//答题页面
       name: 'question',
       component: () => import('@/components/view/PC/question')
     },
     {
-      path: '/score',
+      path: '/score',//答案分析
       name: 'score',
       component: () => import('@/components/view/PC/score')
+    },
+    {
+      path: '/answerList',//解析
+      name: 'answerList',
+      component: () => import('@/components/view/PC/answerList')
+    },
+    {
+      path: '/answerMark',//批改
+      name: 'answerMark',
+      component: () => import('@/components/view/PC/answerMark')
+    },
+    {
+      path: '/questionList',//问卷调查
+      name: 'questionList',
+      component: () => import('@/components/view/PC/questionList'),
+      meta: {
+        requireAuth: true,
+      }
+    },
+    {
+      path: '/questionSurvey',//问卷详细
+      name: 'questionSurvey',
+      component: () => import('@/components/view/PC/questionSurvey')
+    },
+    {
+      path: '/questionResult',//问卷统计
+      name: 'questionResult',
+      component: () => import('@/components/view/PC/questionResult')
+    },
+    {
+      path: '/feedBack',//意见反馈
+      name: 'feedBack',
+      component: () => import('@/components/view/PC/feedBack'),
+      meta: {
+        requireAuth: true,
+      }
     },
   ]
 })

@@ -119,6 +119,7 @@ export default {
 };
 </script>
 <style scoped>
+@import "../../.././assets/css/index.css";
 .layout{
   border: 1px solid #d7dde4;
   background: #f5f7f9;
@@ -126,6 +127,25 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
+jx-que-con dt i.err {
+  background: #d84325;
+  color: #d84325;
+}
+
+.jx-que-con dt i.cur {
+  background: #25bb9b;
+  color: #25bb9b;
+}
+.img-intor p span {
+  color: #d84325;
+  font-size: 35px
+}
+/* .jx-que-con{border-bottom: 1px solid #eee}
+.jx-que-con dl{display: block;min-height: initial;}
+.jx-que-con dd.cur{cursor: pointer;border:1px solid #a5ded2;color: #25bb9b;}
+.jx-que-con dt{padding: 20px;background: #f3f3f3;margin-top: 20px;border-radius: 3px}
+.jx-que-con dt i{display: inline-block;width: 20px;height: 20px;border-radius: 50px;
+	background: #59b59c;color: #fff;text-align: center;line-height: 20px;margin-right: 8px}
 .jx-que-con dt i.err {
   background: #d84325;
   color: #d84325;
@@ -173,6 +193,6 @@ export default {
 .exam-notice p{line-height: 36px;}
 .but input{width: 180px;margin: 0 auto;display: block;color: #fff;font-size: 14px;border-radius: 3px;    text-align: center;
 padding: 10px 0;background: #ff6000;border: #009F95;margin-bottom: 30px;}
-.but input:hover{cursor: pointer;}
+.but input:hover{cursor: pointer;} */
 
 </style>

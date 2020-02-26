@@ -6,18 +6,15 @@
             <div class="nk-content">
               <div class="resource-mod">
                 <div class="resource-mod-hd">
-                  在线考试
+                  意见反馈
                 </div>
                 <div class="resource-mod-bd">
                   <div class="resource-sub-mod">
-                    <div class="hd">
-                      职业能力测评
-                    </div>
                     <div class="bd">
                       <div class="mock-jobs-list clearfix">
                         <a class="mock-jobs-item" v-for="(test,index) in testList" :key="index">
-                          <router-link :to="{name:'testDetail',query:{examId:test.id}}">
-                            <span class="mock-jobs-name">{{test.title}}</span>
+                          <router-link :to="{name:'questionSurvey',query:{queId:test.id}}">
+                            <span class="mock-jobs-name">{{test.asq_name}}</span>
                             <div class="mock-jobs-img">
                               <img src="https://uploadfiles.nowcoder.com/images/20191109/59_1573270956405_8A9C8878206EDC89EA273AF6F4418EA6" alt="">
                             </div>
@@ -52,7 +49,7 @@ export default {
   methods:{
     getData(){
       let bean = {
-        name: "adt_exam_info"
+        name: "adt_asq_info"
       }
       let name = "adt_web_beanSearch";
       let data = ajax(name,bean)

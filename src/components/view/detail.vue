@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Layout :style= "{minHeight:'100vh'}">
+    <Layout :style="{minHeight:'100vh'}">
       <m-header></m-header>
       <Content>
         <h3 class="tit">大标题:{{this.$route.query.headline}}</h3>

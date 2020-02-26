@@ -11,6 +11,8 @@ import $ from 'jQuery'
 import Router from 'vue-router'
 import store from './store'
 import global from '@/components/global'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 Vue.prototype.$ = $
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs

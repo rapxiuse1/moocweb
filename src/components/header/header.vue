@@ -13,31 +13,31 @@
                 <Icon type="ios-keypad"></Icon>
                 在线考试
             </MenuItem>
-            <MenuItem name="3">
+            <MenuItem name="questionList">
                 <Icon type="ios-analytics"></Icon>
                 问卷调查
             </MenuItem>
-            <MenuItem name="4">
+            <MenuItem name="feedBack">
                 <Icon type="ios-paper"></Icon>
                 意见反馈
             </MenuItem>
         </div>
         <div class="login">
-            <MenuItem name="register">
+            <!-- <MenuItem name="register">
                 <Icon type="ios-navigate"></Icon>
                 注册
             </MenuItem>
-            <MenuItem name="login">
+             <MenuItem name="login">
                 <Icon type="ios-navigate"></Icon>
                 登录
-            </MenuItem>
+            </MenuItem>  -->
             <MenuItem name="logout">
                 <Icon type="ios-navigate"></Icon>
                 登出
             </MenuItem>
         </div>
      </Menu>
-     <Modal v-model="modalShow" width="450" footer-hide>
+     <!-- <Modal v-model="modalShow" width="450" footer-hide>
       <div class="login-main">
         <Tabs :value="loginreg">
           <TabPane label="登录" name="login">
@@ -89,7 +89,7 @@
           </TabPane>
         </Tabs>
       </div>
-     </Modal>
+     </Modal> -->
      <Modal v-model="outShow" width="330" @on-ok="ok" @on-cancel="cancel">
        <p>确定退出登录吗?</p>
      </Modal>
@@ -184,7 +184,8 @@ export default {
       this.$router.push('privacy')
     },
     ok(){
-      sessionStorage.setItem("userName",null)
+      sessionStorage.removeItem("userName")
+      sessionStorage.removeItem("userId")
       let name = 'adt_web_logout'
       let data = ajax(name)
       console.log(data)
@@ -214,7 +215,7 @@ export default {
   margin-left: 150px;
 }
 .login{
-  width: 310px;
+  width: 100px;
   margin: 0 auto;
   margin-right: 0;
 }

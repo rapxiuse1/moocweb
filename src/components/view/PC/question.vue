@@ -221,6 +221,7 @@ export default {
       arg.paperid = this.$route.query.id;
       arg.userid = this.$route.query.userId;
       arg.examid = this.$route.query.examId;
+      
       console.log(arg);
       clearInterval(this.timer);
       //查询是否已经考过试了
@@ -241,6 +242,7 @@ export default {
           answerList.push(jsonBean);
         }
         arg.answerList = answerList;
+        arg.isweb = true;
         console.log(arg)
         let name1 = "getPaperGrade";
         let bean1 = arg;
@@ -267,7 +269,7 @@ export default {
 }
 </script>
 <style scoped>
-li{list-style:none;}
+@import "../../.././assets/css/index.css";
 .layout{
   border: 1px solid #d7dde4;
   background: #f5f7f9;
@@ -275,7 +277,7 @@ li{list-style:none;}
   border-radius: 4px;
   overflow: hidden;
 }
-.questio-con{background: #fff;margin: 30px auto;border: 1px solid #e0e0e0;
+/* .questio-con{background: #fff;margin: 30px auto;border: 1px solid #e0e0e0;
 border-radius: 3px;overflow: hidden;width: 1000px;}
 .que-tit{padding: 20px;border-bottom: 1px solid #eee;overflow: hidden;}
 .que-tit h1{font-size: 20px;color: #333;float: left;font-weight: normal;}
@@ -344,5 +346,5 @@ position: relative;}
 .shade_box .que-but input.gray{background: #bbb}
 .but input{width: 130px;margin: 0 auto;display: block;color: #fff;font-size: 14px;border-radius: 3px;    text-align: center;
 padding: 10px 0;background: #ff6000;border: #009F95;margin-bottom: 30px;margin-right: 10px;}
-.but input:hover{cursor: pointer;}
+.but input:hover{cursor: pointer;} */
 </style>

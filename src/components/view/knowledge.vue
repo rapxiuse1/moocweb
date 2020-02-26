@@ -1,6 +1,6 @@
 <template>
    <div class="layout">
-        <Layout :style= "{minHeight:'100vh'}">
+        <Layout :style="{minHeight:'100vh'}">
           <m-header></m-header>
             <Layout>
               <Sider hide-trigger :style="{background: '#fff'}">

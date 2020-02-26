@@ -46,9 +46,14 @@ export default {
 		}
   },
   mounted(){
-    // console.log('111')
-    this.examId = this.getUrlKey('examId')
-    this.userId = this.getUrlKey('userId')
+    // if(this.getUrlKey('examId')){
+    //   console.log('111')
+    //   this.examId = this.getUrlKey('examId')
+    //   this.userId = this.getUrlKey('userId')
+    // }
+    this.examId = this.$route.query.examId
+    //this.userId = '66632a9318ff480ca13c6490e9e18f3b'
+    this.userId = sessionStorage.getItem("userId")
     console.log(this.examId)
     console.log(this.userId)
     let name = 'selectExamById'
@@ -60,12 +65,6 @@ export default {
     console.log(data)
     this.array = data.result
     console.log(this.array)
-    // axios(name,bean).then((res) =>{
-    //   console.log(res.result)
-    //   this.array = res.result
-    // }).catch(function (error) {
-    //   console.log(error)
-    // });
   },
   methods:{
     getUrlKey(name){
@@ -80,6 +79,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../../.././assets/css/index.css";
 .layout{
   border: 1px solid #d7dde4;
   background: #f5f7f9;
@@ -87,87 +87,5 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-.title-con{
-  background: #fff;
-  margin: 30px auto;
-  text-align: center;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
-  overflow: hidden;padding: 20px;
-  width: 960px;
-}
-.title-con h1{
-  font-size: 22px;
-  line-height: 40px;
-  color: #333;
-}
-.title-con h1:before{
-  background: #ff6547;
-	content: "";
-	display: inline-block;
-	width: 7px;
-	height: 7px;
-	margin-right: 5px;
-	margin-bottom: 2px;
-	vertical-align: middle;
-}
-.title-con h1 i{
-  color: #ff6000;
-  font-weight: normal;
-  font-size: 16px;
-}
-.img-intor{
-  margin: 30px 0 50px;
-}
-.img-intor img{
-  display: inline-block;
-  width: 166px;
-  vertical-align: top;
-  margin-right: 30px;
-}
-.img-intor div{
-  display: inline-block;
-  height: 140px;
-  text-align: left;
-  padding-top: 20px;
-}
-.img-intor div p{
-  line-height: 32px;
-  font-size: 16px;
-  color: #666;
-}
-.exam-notice{
-	text-align: left;
-	background: #f0f0f0;
-	color: #666!important;
-	padding: 20px;
-	max-height: 300px;
-	max-width: 780px;
-	border-radius: 0;
-	border: none;
-	overflow-y: auto;
-	margin: 30px auto 50px;
-	z-index: 1;
-	position: relative;
-	font-size: 14px;
-}
-.exam-notice p{
-  line-height: 36px;
-}
-.but input{
-  width: 180px;
-  margin: 0 auto;
-  display: block;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 3px;
-  text-align: center;
-  padding: 10px 0;
-  background: #ff6000;
-  border: #009F95;
-  margin-bottom: 30px;
-}
-.but input:hover{
-  cursor: pointer;
-}
+
 </style>
