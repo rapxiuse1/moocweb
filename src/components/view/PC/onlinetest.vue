@@ -6,20 +6,22 @@
             <div class="nk-content">
               <div class="resource-mod">
                 <div class="resource-mod-hd">
-                  在线考试
+                  <div class="menu">
+                  <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage">
+                    <MenuItem name="all">在线考试</MenuItem>                
+                  </Menu>
+                  </div>
+                  <div class="bor"></div>
                 </div>
                 <div class="resource-mod-bd">
                   <div class="resource-sub-mod">
-                    <div class="hd">
-                      职业能力测评
-                    </div>
                     <div class="bd">
                       <div class="mock-jobs-list clearfix">
                         <a class="mock-jobs-item" v-for="(test,index) in testList" :key="index">
                           <router-link :to="{name:'testDetail',query:{examId:test.id}}">
                             <span class="mock-jobs-name">{{test.title}}</span>
                             <div class="mock-jobs-img">
-                              <img src="https://uploadfiles.nowcoder.com/images/20191109/59_1573270956405_8A9C8878206EDC89EA273AF6F4418EA6" alt="">
+                              <img src="@/assets/test.png" alt="">
                             </div>
                           </router-link>                 
                         </a>                
@@ -76,10 +78,6 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-.nk-content {
-  margin-right: 0;
-  width: 1000px;
-}
 .resource-mod .resource-mod-hd {
   font-size: 18px;
   color: #2f1c41c4;
@@ -88,6 +86,8 @@ export default {
 }
 .resource-mod .resource-mod-bd {
   padding: 0 25px;
+  margin-left: 396px;
+  margin-right: 200px;
 }
 .resource-sub-mod .bd {
   font-size: 0;
@@ -111,8 +111,8 @@ a {
   vertical-align: middle;
   box-sizing: border-box;
   text-align: center;
-  width: 220px;
-  height: 170px;
+  width: 240px;
+  height: 180px;
   padding: 20px 10px;
   margin: 0 20px 20px 0;
   border: 1px solid #ddd;
@@ -134,12 +134,35 @@ a {
   font-size: 16px;
 }
 .mock-jobs-img {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
+  width: 148px;
+  height: 147px;
+  margin-bottom: -23px;
+  margin: -21px auto;
   overflow: hidden;
-  background: #f4f4f4;
-  border-radius: 50%;
+  color: rgba(187, 215, 255, 1);
   display: block;
+}
+.menu{
+  width:1920px;
+  height:64px;
+  background:rgba(255,255,255,1);
+  opacity:1;
+}
+.bor{
+  width:1200px;
+  height:0px;
+  border:2px solid rgba(34,87,180,1);
+  opacity:1;
+  margin-left: 360px;
+}
+.menu .ivu-menu{
+  margin-left: 360px;
+  background:rgba(255,255,255,1);
+}
+.menu .ivu-menu .ivu-menu-item{
+  color: rgba(51, 51, 51, 1);
+}
+.menu .ivu-menu .ivu-menu-item-active,.menu .ivu-menu .ivu-menu-item:hover{
+  color: rgba(50, 135, 255, 1);
 }
 </style>

@@ -1,42 +1,32 @@
 <template>
     <Header>
-      <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage">
         <div class="layout-logo">
           <img src="@/assets/logo.png" alt="">
         </div>
         <div class="layout-nav">
+          <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage">
             <MenuItem name="knowledge">
-                <Icon type="ios-navigate"></Icon>
                 常见问题
             </MenuItem>
             <MenuItem name="onlinetest">
-                <Icon type="ios-keypad"></Icon>
                 在线考试
             </MenuItem>
             <MenuItem name="questionList">
-                <Icon type="ios-analytics"></Icon>
                 问卷调查
             </MenuItem>
             <MenuItem name="feedBack">
-                <Icon type="ios-paper"></Icon>
                 意见反馈
             </MenuItem>
-        </div>
-        <div class="login">
-            <!-- <MenuItem name="register">
-                <Icon type="ios-navigate"></Icon>
-                注册
-            </MenuItem>
-             <MenuItem name="login">
-                <Icon type="ios-navigate"></Icon>
-                登录
-            </MenuItem>  -->
+          </Menu>          
+        </div> 
+        <div class="layout-login">
+          <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage">
             <MenuItem name="logout">
-                <Icon type="ios-navigate"></Icon>
+            <Icon type="ios-contact" />
                 登出
             </MenuItem>
-        </div>
-     </Menu>
+          </Menu>
+        </div>    
      <!-- <Modal v-model="modalShow" width="450" footer-hide>
       <div class="login-main">
         <Tabs :value="loginreg">
@@ -198,57 +188,40 @@ export default {
 }
 </script>
 
-<style  scoped>
+<style scoped>
+.ivu-layout-header{
+  display: flex;
+}
+.ivu-layout-header,.ivu-menu{
+  background: #2b303b;
+  height: 64px;
+  line-height: 64px;
+}
+
+.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item-active,.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item:hover{
+  color: #fff;
+}
+.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item{
+  color: #d9d9d9;
+}
 .layout-logo{
-  width: 105px;
-  height: 38px;
-  background: #5b6270;
+  width: 144px;
+  height: 35px;
+  background: #2b303b;
   border-radius: 3px;
-  float: left;
-  position: relative;
-  top: 12px;
-  left: 20px;
+  margin: 15px 0 14px 216px;
 }
 .layout-nav{
-  width: 700px;
+  flex: 1;
+  height: 64px;
+  line-height: 64px;
   margin: 0 auto;
-  margin-left: 150px;
+  margin-left: 243px;
+  border-bottom:2px solid #2b303b;
 }
-.login{
+.layout-login{
+  margin-right: 100px;
   width: 100px;
-  margin: 0 auto;
-  margin-right: 0;
 }
-.code {
-  width: 83px;
-  height: 27px;
-  border: 1px solid #ccc;
-  float: right;
-  border-radius: 2px;
-  margin-top:3px;
-}
-.control{
-  height: 60px;
-}
-.control-a{
-  float: right;
-  margin-right: 90px;
-}
-.privacy_tip{
-  font-size: 12px;
-  color: #717a84;
-  text-align: center;
-  margin-top: 20px;
-}
-.privacy_tip a:visited {
-  font-size: 12px;
-  color: #37f;
-}
-.form-footer{
-  display: block;
-  height: 40px;
-  width: 300px;
-  margin:0 auto;
-  border-radius:24px;
-}
+
 </style>

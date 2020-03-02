@@ -2,38 +2,39 @@
    <div class="layout">
         <Layout :style="{minHeight:'100vh'}">
           <m-header></m-header>
-            <Layout>
-              <Sider hide-trigger :style="{background: '#fff'}">
-                  <Menu theme="light" width="auto" @on-select="inPage">
-                      <MenuItem name="all">
-                      <Icon type="md-menu"/>
-                      全部
-                      </MenuItem>
+              <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+                <div class="menu">
+                  <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage">
+                    <MenuItem name="all">全部</MenuItem>
                       <MenuItem :name="nav.id"  v-for ="(nav,index) in navList" :key="index">
-                      <Icon type="ios-paper" />
-                      {{nav.name}}
+                        {{nav.name}}
+                    </MenuItem>
+                  </Menu>
+                </div>
+                <div class="content">
+                  <div class="menu2">
+                    <Menu mode="horizontal" theme="dark" @on-select="toPage">
+                      <MenuItem :name="liv.id" v-for ="(liv,index) in list" :key="index">
+                        {{liv.name}}
                       </MenuItem>
                   </Menu>
-              </Sider>
-            <Layout>
-              <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
-                   <Menu mode="horizontal" theme="light" @on-select="toPage">
-                      <MenuItem :name="liv.id" v-for ="(liv,index) in list" :key="index">
-                          <Icon type="ios-paper" />
-                          {{liv.name}}
-                      </MenuItem>
-                   </Menu>
+                  </div>
+                  <div class="bor"></div>
+                  <div class="table">
                     <Table stripe width='100%' :columns="columns" :data="curData" @on-row-click="detailShow">
                     </Table>
-                    <div style="margin: 10px;overflow: hidden">
-                      <div style="float: right;">
-                        <Page :total="dataCount" :page-size="pageSize" 
-                        :current="pageCurrent" @on-change="changePage"></Page>
-                      </div>
+                    <div class="page" style="margin: 10px;overflow: hidden">
+                      <!-- <a>首页</a>
+                      <a>上一页</a>
+                      <a>下一页</a>
+                      <a>尾页</a> -->
+                      <Page :total="dataCount" :page-size="pageSize" 
+                      :current="pageCurrent" @on-change="changePage">
+                      </Page>
                     </div>
-              </Content>
-            </Layout>
-          </Layout>
+                  </div>      
+                </div>               
+              </Content> 
           <m-footer></m-footer>
         </Layout>
     </div>
@@ -215,4 +216,64 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
+.menu{
+  width:1920px;
+  height:64px;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+  opacity:1;
+  border-bottom:2px solid rgba(0,0,0,0.16);
+}
+.menu .ivu-menu{
+  margin-left: 360px;
+  background:rgba(255,255,255,1);
+}
+.menu .ivu-menu .ivu-menu-item{
+  color: rgba(51, 51, 51, 1);
+}
+.menu .ivu-menu .ivu-menu-item-active,.menu .ivu-menu .ivu-menu-item:hover{
+  color: rgba(50, 135, 255, 1);
+}
+
+.menu2{
+  width:1920px;
+  height:64px;
+  background:rgba(255,255,255,1);
+  opacity:1;
+}
+.bor{
+  width:1200px;
+  height:0px;
+  border:2px solid rgba(34,87,180,1);
+  opacity:1;
+  margin-left: 360px;
+}
+.menu2 .ivu-menu{
+  margin-left: 720px;
+  background:rgba(255,255,255,1);
+}
+.menu2 .ivu-menu .ivu-menu-item{
+  color: rgba(51, 51, 51, 1);
+}
+.menu2 .ivu-menu .ivu-menu-item-active,.menu2 .ivu-menu .ivu-menu-item:hover{
+  color: rgba(50, 135, 255, 1);
+}
+
+.table{
+  margin-left: 384px;
+}
+.page .ivu-page{  
+  float: right;
+}
+/* .page a{
+  width:56px;
+  height:20px;
+  border:1px solid rgba(34,87,180,1);
+  opacity:1;
+  border-radius:3px;
+  font-size:12px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:16px;
+} */
 </style>
