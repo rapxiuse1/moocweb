@@ -1,38 +1,25 @@
 <template>
-    <div class="login">
-        <div class="from-wrap">
-            <!-- <h2>登录</h2>
-            <Form ref="loginData" :model="loginData" :label-width="100">
-                <FormItem label="用户名" prop="acct">
-                    <Input type="text" v-model="loginData.acct" placeholder="请输入账号"></Input>
-                </FormItem>
-                <FormItem label="密码" prop="pass">
-                    <Input type="password" v-model="loginData.pass" placeholder="请输入密码"></Input>
-                </FormItem>
-                <FormItem label="验证码" prop="code">
-                    <Input type="text" v-model="loginData.code" placeholder="请输入验证码"></Input>
-                </FormItem>
-                <FormItem class="form-footer">
-                    <Button type="primary" @click="handleSubmit('loginData')">登录</Button>
-                    <Button type="primary" @click="handleReset('loginData')" style="margin-left: 8px">重置</Button>
-                </FormItem>
-            </Form> -->
-        <Tabs>
-          <TabPane label="登录" name="login">
-            <Form ref="loginData1" :model="loginData1" :label-width="60">
+  <div class="login">
+    <div class="box">
+      <div class="from-wrap">
+        <div class="top">
+          <img class="logo" src="@/assets/logo1.png" alt="">
+        </div>
+        <div class="text">
+          <Tabs>
+            <TabPane label="登录" name="login">
+              <Form ref="loginData1" :model="loginData1" :label-width="60">
                 <FormItem label="用户名" prop="acct">
                     <Input type="text" v-model="loginData1.acct" placeholder="请输入账号" style="width: 260px"></Input>
                 </FormItem>
-                <FormItem label="密码" prop="pass">
+                <FormItem label="密 码" prop="pass" class="kg">
                     <Input type="password" v-model="loginData1.pass" placeholder="请输入密码" style="width: 260px"></Input>
                 </FormItem>
                 <FormItem label="验证码" prop="code">
-                    <Input type="text" v-model="loginData1.code" placeholder="验证码" style="width: 260px"></Input>
-                    <div class="code">
-                      <img id="img_code2" :style="{width:'80px',}">
-                    </div>
+                    <Input type="text" v-model="loginData1.code" placeholder="验证码" style="width: 200px"></Input>
+                    <img class="code" id="img_code2">
                 </FormItem>
-            </Form>
+              </Form>
                 <div class="control">
                   <div class="control-a">
                     <a @click="findpwd">找回密码 | </a>
@@ -44,16 +31,16 @@
                   登录即同意
                   <a @click="privacy">使用协议</a>
                 </div>
-          </TabPane>
-          <TabPane label="注册" name="register">
-            <Form ref="loginData2" :model="loginData2"  :label-width="60">
+            </TabPane>
+            <TabPane label="注册" name="register">
+              <Form ref="loginData2" :model="loginData2"  :label-width="60">
               <FormItem label="用户名" prop="acct">
                   <Input type="text" v-model="loginData2.acct" placeholder="请输入您的用户名" style="width: 260px"></Input>
               </FormItem>
-              <FormItem label="密码" prop="pass">
+              <FormItem label="密 码" prop="pass" class="kg">
                   <Input type="password" v-model="loginData2.pass" placeholder="请输入您的密码" style="width: 260px"></Input>
               </FormItem>
-              <FormItem label="密码" prop="pass2">
+              <FormItem label="密 码" prop="pass2" class="kg">
                   <Input type="password" v-model="loginData2.pass2" placeholder="请再次输入密码" style="width: 260px"></Input>
               </FormItem>
               <FormItem label="手机号" prop="phone">
@@ -62,12 +49,14 @@
               <FormItem label="证件号" prop="cardno">
                   <Input type="text" v-model="loginData2.cardno" placeholder="请输入您的证件号" style="width: 260px"></Input>
               </FormItem>
-            </Form>
+              </Form>
               <Button class="form-footer" type="primary" long @click="handleSubmit('loginData2')">注册</Button>
-          </TabPane>
-        </Tabs>
+            </TabPane>
+          </Tabs>
         </div>
-    </div>
+      </div>
+    </div> 
+  </div>
 </template>
 
 <script>
@@ -168,22 +157,61 @@ export default {
 
 <style scoped>
 .login {
-    width: 100%;
-    height: 800px;
-    background-color: #515A6E;
-    position: relative;
+  width: 100%;
+  height: 100vh;	
+	margin: 0 auto;
+	background-image: url(../../assets/bg.png);
+	background-repeat: no-repeat;
+	background-size: cover; 
+	overflow: auto;
+  position: relative;
 }
-.login .from-wrap{
-    position: fixed;
-    left: 50%;
-    margin-left: -200px;
-    top: 50%;
-    margin-top: -150px;
-    width: 470px;
-    height: 420px;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 20px 30px;
+.box{
+  width: 32%;
+  background:rgba(255,255,255,0.3);
+  border-radius:10px;
+  position: absolute;
+  left: 60%;
+  top: 50%;
+  margin-top: -15%;
+}
+.from-wrap{
+  position: relative;
+  width: 93%;
+  background:rgba(255,255,255,1);
+  border-radius:10px;
+  opacity: 1;
+  margin: 3% 3%;
+  padding-bottom: 40px;
+}
+.top{
+  height: 139px;
+  position: relative;
+}
+.logo{
+  max-width: 100%;
+	max-height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 7%;
+}
+.text{
+  margin-left: 10%;
+}
+.text .ivu-tabs .ivu-tabs-nav .ivu-tabs-tab{
+  width:40px;
+  height:20px;
+  font-size:20px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+}
+.text .ivu-tabs-nav-container:focus .ivu-tabs-tab-focused{
+  font-weight: bold;
+}
+.kg{
+  letter-spacing: 3.5px
 }
 .login h2 {
     text-align: center;
@@ -199,12 +227,13 @@ a{
   left:10px;
 }
 .code {
-  width: 83px;
-  height: 27px;
+  max-width: 100%;
+	max-height: 100%;
   border: 1px solid #ccc;
-  float: right;
+  position: absolute;
   border-radius: 2px;
-  margin-top:3px;
+  padding-top: 1px;
+  margin-left:10px;
 }
 .control{
   height: 60px;
@@ -212,13 +241,14 @@ a{
 }
 .control-a{
   float: right;
-  margin-right: 90px;
+  margin-right: 81px;
 }
 .privacy_tip{
   font-size: 12px;
   color: #717a84;
   text-align: center;
   margin-top: 20px;
+  margin-left: -10%;
 }
 .privacy_tip a:visited {
   font-size: 12px;
@@ -226,9 +256,10 @@ a{
 }
 .form-footer{
   display: block;
-  height: 40px;
-  width: 300px;
+  height: 50px;
+  width: 70%;
   margin:0 auto;
+  margin-left: 10%;
   border-radius:24px;
 }
 </style>
