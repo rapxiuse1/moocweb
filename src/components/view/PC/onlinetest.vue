@@ -36,8 +36,6 @@
         </Layout>
     </div>
 </template>
-
-
 <script>
 import MHeader from '@/components/header/header.vue'
 import MFooter from '@/components/footer/footer.vue'
@@ -69,7 +67,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .layout{
   border: 1px solid #d7dde4;

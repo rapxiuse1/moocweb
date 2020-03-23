@@ -93,8 +93,9 @@ export default {
     this.login.request(function(method, param) {
       ajax(method, param, function(data) {
           console.log(data)
-          console.log(data.result.id)
-          sessionStorage.setItem("userId",data.result.id)
+          if(data.result){
+            sessionStorage.setItem("userId",data.result.id)
+          }
           vm.resultdesc = data.resultdesc
           vm.alert(data)
       })
@@ -103,7 +104,7 @@ export default {
   methods: {
     alert(data) {
       if(data.result){
-        console.log(this.b)
+        console.log(data.resultdesc)
         if(this.b == 'registe'){
           this.$Message.info(data.resultdesc)
           return
