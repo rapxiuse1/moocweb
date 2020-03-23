@@ -16,13 +16,14 @@
                     <Input type="password" v-model="loginData1.pass" placeholder="请输入密码" style="width: 260px"></Input>
                 </FormItem>
                 <FormItem label="验证码" prop="code">
-                    <Input type="text" v-model="loginData1.code" placeholder="验证码" style="width: 200px"></Input>
+                    <Input type="text" v-model="loginData1.code" placeholder="验证码" style="width: 150px"></Input>
                     <img class="code" id="img_code2">
                 </FormItem>
               </Form>
                 <div class="control">
                   <div class="control-a">
-                    <a @click="findpwd">找回密码 | </a>
+                    <a @click="findpwd">找回密码</a>
+                    <div class="line"></div>
                     <a @click="handleReset('loginData1')">重置</a>
                   </div>
                 </div>
@@ -227,12 +228,11 @@ a{
   left:10px;
 }
 .code {
-  max-width: 100%;
-	max-height: 100%;
-  border: 1px solid #ccc;
+  width: 100px;
+  height: 31px;
   position: absolute;
   border-radius: 2px;
-  padding-top: 1px;
+  padding-top: 3px;
   margin-left:10px;
 }
 .control{
@@ -241,8 +241,15 @@ a{
 }
 .control-a{
   float: right;
-  margin-right: 81px;
+  margin-right: 129px;
 }
+.line{
+  margin: -2px 3px;
+  background: #2d8cf0;
+  width: 1px;
+  height: 14px;
+  display: inline-block;
+  } 
 .privacy_tip{
   font-size: 12px;
   color: #717a84;
