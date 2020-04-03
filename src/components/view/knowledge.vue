@@ -1,42 +1,46 @@
 <template>
    <div class="layout">
-        <Layout :style="{minHeight:'100vh'}">
+      <Layout :style="{minHeight:'100vh'}">
           <m-header></m-header>
-              <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+            <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
+                <div class="tips">
+                  <img class="problem" src="@/assets/problem.png" alt="">
+                  <span class="text">常见问题</span>
+                </div>
                 <div class="menu">
-                  <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage">
+                  <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage" active-name="all">
                     <MenuItem name="all">全部</MenuItem>
                       <MenuItem :name="nav.id"  v-for ="(nav,index) in navList" :key="index">
                         {{nav.name}}
-                    </MenuItem>
+                      </MenuItem>
                   </Menu>
                 </div>
                 <div class="content">
+                  <span class="type">类型:</span>
                   <div class="menu2">
                     <Menu mode="horizontal" theme="dark" @on-select="toPage">
                       <MenuItem :name="liv.id" v-for ="(liv,index) in list" :key="index">
                         {{liv.name}}
                       </MenuItem>
-                  </Menu>
+                    </Menu>
                   </div>
-                  <div class="bor"></div>
                   <div class="table">
-                    <Table stripe width='100%' :columns="columns" :data="curData" @on-row-click="detailShow">
+                    <Table width='100%' :columns="columns" :data="curData" @on-row-click="detailShow">
                     </Table>
-                    <div class="page" style="margin: 10px;overflow: hidden">
-                      <!-- <a>首页</a>
-                      <a>上一页</a>
-                      <a>下一页</a>
-                      <a>尾页</a> -->
-                      <Page :total="dataCount" :page-size="pageSize" 
-                      :current="pageCurrent" @on-change="changePage">
-                      </Page>
-                    </div>
-                  </div>      
+                  <div class="page" style="margin: 10px;overflow: hidden">
+                    <!-- <a>首页</a>
+                    <a>上一页</a>
+                    <a>下一页</a>
+                    <a>尾页</a> -->
+                    <Page :total="dataCount" :page-size="pageSize" show-total show-elevator
+                    :current="pageCurrent" @on-change="changePage">
+                    </Page>
+                  </div> 
+                  </div>        
                 </div>               
-              </Content> 
+            </Content> 
           <m-footer></m-footer>
-        </Layout>
+      </Layout>
     </div>
 </template>
 
@@ -55,13 +59,14 @@ export default {
       dataCount:0,//总条数
       pageCurrent:1,//当前页
       columns:[
-        {title:'大标题',key:'headline',width:350,tooltip:true},
-        {title:'小标题',key:'subtitle',width:350,tooltip:true},
-        {title:'所属分类',key:'fl_name',width:150},
-        {title:'创建人',key:'creator',width:100},
-        {title:'创建时间',key:'createtime',width:220},
+        {title:'大标题',key:'headline',align: 'center',width:320,tooltip:true},
+        {title:'小标题',key:'subtitle',align: 'center',width:320,tooltip:true},
+        {title:'所属分类',key:'fl_name',align: 'center',width:160},
+        {title:'创建人',key:'creator',align: 'center',width:160},
+        {title:'创建时间',key:'createtime',align: 'center',width:200},
         {title:' ',
         key:'content',
+        align: 'center',
         render:(h,params) => {
           return h('div',[
             h('span',{
@@ -72,6 +77,7 @@ export default {
           ])
         }},
         {title:' ',
+        align: 'center',
         key:'attachment',
         render:(h,params) => {
           return h('div',[
@@ -96,12 +102,16 @@ export default {
   },
   created(){
     this.getdata()   
-	},
+  },
+  mounted(){
+
+  },
   methods:{
     getdata(){
 	    let name = 'adt_web_getZSKFL'
       this.navList = ajax(name).result
       console.log(this.navList)
+      this.list = ajax(name).result
       //初始化获取知识管理全部数据
       let name2 = 'adt_web_getZSKInfo'
       this.data1 = ajax(name2).result
@@ -121,6 +131,7 @@ export default {
     inPage(name){
       console.log(name)
       if(name == "all"){
+        this.list = null
         this.getdata()
       }else{
         this.id = name 
@@ -216,64 +227,111 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
+}
 .menu{
-  width:1920px;
-  height:64px;
   background:rgba(255,255,255,1);
-  box-shadow:0px 3px 6px rgba(0,0,0,0.16);
   opacity:1;
-  border-bottom:2px solid rgba(0,0,0,0.16);
+  border-bottom:2px solid rgba(50,135,255,1);
 }
 .menu .ivu-menu{
-  margin-left: 360px;
   background:rgba(255,255,255,1);
+  height: 32px;
+  z-index: 99;
 }
 .menu .ivu-menu .ivu-menu-item{
   color: rgba(51, 51, 51, 1);
+  width: 88px;
+  font-size:16px;
+  font-weight:400;
+  line-height:33px;
+  font-family:Microsoft YaHei;
+  text-align: center;
+  opacity:1;
 }
 .menu .ivu-menu .ivu-menu-item-active,.menu .ivu-menu .ivu-menu-item:hover{
   color: rgba(50, 135, 255, 1);
 }
-
+.menu .ivu-menu .ivu-menu-item-selected{
+  background: rgba(50, 135, 255, 1);
+  color:rgba(255,255,255,1);
+}
+.menu .ivu-menu .ivu-menu-item-selected:hover{
+  color: rgba(255,255,255,1);
+}
+.type{
+  width:36px;
+  height:24px;
+  font-size:14px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:24px;
+  color:rgba(153,153,153,1);
+  opacity:1;
+  vertical-align: bottom;
+  display: inline-block;
+  margin-bottom: 15px;
+}
 .menu2{
-  width:1920px;
-  height:64px;
+  display: inline-block;
   background:rgba(255,255,255,1);
   opacity:1;
-}
-.bor{
-  width:1200px;
-  height:0px;
-  border:2px solid rgba(34,87,180,1);
-  opacity:1;
-  margin-left: 360px;
+  vertical-align: middle;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .menu2 .ivu-menu{
-  margin-left: 720px;
   background:rgba(255,255,255,1);
+  height: 24px;
+  z-index: 99;
 }
 .menu2 .ivu-menu .ivu-menu-item{
   color: rgba(51, 51, 51, 1);
+  font-size:14px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:24px;
+  opacity:1;
 }
 .menu2 .ivu-menu .ivu-menu-item-active,.menu2 .ivu-menu .ivu-menu-item:hover{
   color: rgba(50, 135, 255, 1);
 }
-
-.table{
-  margin-left: 384px;
-}
 .page .ivu-page{  
   float: right;
 }
-/* .page a{
-  width:56px;
-  height:20px;
-  border:1px solid rgba(34,87,180,1);
-  opacity:1;
-  border-radius:3px;
-  font-size:12px;
+.tips{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.problem{
+  width: 18px;
+  height: 18px;
+  padding-top: 1px;
+  vertical-align: middle;
+}
+.text{
+  width:64px;
+  height:21px;
+  font-size:16px;
   font-family:Microsoft YaHei;
   font-weight:400;
-  line-height:16px;
-} */
+  line-height:21px;
+  color:rgba(102,102,102,1);
+  vertical-align: middle;
+  opacity:1;
+}
+</style>
+<style>
+.table .ivu-table-wrapper .ivu-table th{
+  height: 40px;
+  background:rgba(245,250,255,1);
+  font-size:16px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:40px;
+  color:rgba(34,87,180,1);
+  opacity:1;
+}
 </style>

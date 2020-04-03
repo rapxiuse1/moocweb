@@ -2,7 +2,7 @@
   <div class="layout">
     <Layout :style="{minHeight:'100vh'}">
     <m-header></m-header>
-    <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+    <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
       <div class="shade_box" v-if="flag">
         <div class="shade_box_w">
           <div class="pop-title">
@@ -277,74 +277,8 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-/* .questio-con{background: #fff;margin: 30px auto;border: 1px solid #e0e0e0;
-border-radius: 3px;overflow: hidden;width: 1000px;}
-.que-tit{padding: 20px;border-bottom: 1px solid #eee;overflow: hidden;}
-.que-tit h1{font-size: 20px;color: #333;float: left;font-weight: normal;}
-.que-tit p{float: right;font-weight: normal;font-size: 20px;}
-.que-type{padding:15px 20px;display: none}
-.que-type span{font-size: 16px;color: #666;}
-.que-type span i{color: #999;}
-.que-type span.que-num{background: #eee;padding: 3px 10px;border-radius: 4px;}
-.que-con dl{font-size: 16px; padding: 20px;color: #333;display: none;min-height: 304px;line-height: 20px}
-.que-con dl.active,.que-type.active{display: block}
-.que-con dt{margin-bottom: 20px;}
-.que-con dt p{display: inline;}
-.que-con dd{margin-bottom: 20px;
-	border: 1px solid #d4d4d4;
-	border-radius: 4px;
-	padding: 12px 20px 13px;
-	background: #fff;
-	display: block;
-	word-break: break-all;
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
 }
-.que-conup dd:hover{cursor: pointer;border:1px solid #a5ded2;color: #25bb9b;}
-.que-conup dd.cur{border:1px solid #25bb9b;color: #25bb9b;}
-.que-conup dd:hover .icons{border-color: #25bb9b;}
-.que-conup dd.cur .icons{background: #25bb9b;border:1px solid #25bb9b;}
-.que-conup dd.cur .icons:before{
-	content: "√";
-	color: #fff;
-	font-size: 11px;
-	line-height: 16px;
-	width: 11px;
-	height: 11px;
-	text-align: center;
-	position: absolute;
-	left: 0;top: 0;
-}
-.icons{border: 1px solid #ddd;
-vertical-align: -3px;
-width: 14px;
-height: 14px;
-background: #fff;
-display: inline-block;
-margin-right: 3px;
-border-radius: 2px;
-line-height: normal;
-position: relative;}
-.que-con dd input[type="checkBox"],.que-con dd input[type="radio"]{display: none;}
-.que-con dd textarea{width: 100%;line-height: 24px;height: 74px;width: 938px;padding: 10px;border-color: #d4d4d4;resize: none;}
-.que-con .type-C dd{overflow: hidden;padding: 0;border: 0}
-.que-but{overflow: hidden;}
-.que-but input{float: right;width: 110px;margin-right: 20px;}
-.que-but input.next-one{background: #25bb9b;}
-.que-tips{clear: both;color: #888;font-size: 14px;text-align: right;margin-right: 20px;padding-bottom: 20px;}
-.que-card{border-top: 1px dashed #ddd;padding: 20px;font-size: 16px;line-height: 30px;}
-.que-card ul{margin-top: 15px;display: block;overflow: hidden;}
-.que-card ul li{position: relative;font-size: 16px;width: 40px;color: #c1c5c9;margin-top: 7px;
-	text-align: center; height: 40px;line-height: 40px;float: left;margin-left: 10px;}
-.que-card ul li.up{color: #59b59c;}
-.que-card ul li:hover,.que-card ul li.cur{display: block;background: #59b59c;color: #fff;cursor: pointer;}
-
-.shade_box{position: fixed;top: 0;left: 0;bottom: 0;right: 0;z-index: 1000;background: rgba(0, 0, 0, 0.6)}
-.shade_box_w{width: 630px;overflow: hidden;background: #f0f0f0;margin: 250px auto;border-radius: 4px}
-.shade_box .pop-title{padding: 15px 20px;overflow: hidden;}
-.shade_box .pop-title h3{font-size: 16px;font-weight: normal;line-height: 20px;border-left: 3px solid #ff6547;padding-left: 10px;}
-.shade_box_w p{padding:50px 100px;text-align: center;font-size: 16px;background: #fff;line-height: 30px}
-.shade_box .que-but input{margin-top: 20px;margin-bottom: 20px}
-.shade_box .que-but input.gray{background: #bbb}
-.but input{width: 130px;margin: 0 auto;display: block;color: #fff;font-size: 14px;border-radius: 3px;    text-align: center;
-padding: 10px 0;background: #ff6000;border: #009F95;margin-bottom: 30px;margin-right: 10px;}
-.but input:hover{cursor: pointer;} */
 </style>

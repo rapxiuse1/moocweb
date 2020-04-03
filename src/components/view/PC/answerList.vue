@@ -2,7 +2,7 @@
     <div class="layout">
       <Layout :style="{minHeight:'100vh'}">
         <m-header></m-header>
-         <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+         <Content :style="{padding: 0, minHeight: '280px',width:'62.5%', background: '#fff'}">
         <!--内容-->
         <div class="title-con score-con">
             <h1>
@@ -161,6 +161,10 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
+}
 .jx-que-con dt i.err {
   background: #d84325;
   color: #d84325;
@@ -174,58 +178,4 @@ export default {
   color: #d84325;
   font-size: 35px;
 }
-/* .title-con{background: #fff;margin: 30px auto;text-align: center;border: 1px solid #e0e0e0;
-			border-radius: 3px;overflow: hidden;padding: 20px;width: 960px;}
-.title-con h1{font-size: 22px;line-height: 40px;color: #333;}
-.title-con h1:before{background: #ff6547;
-	content: "";
-	display: inline-block;
-	width: 7px;
-	height: 7px;
-	margin-right: 5px;
-	margin-bottom: 2px;
-	vertical-align: middle;
-}
-.title-con h1 i{color: #ff6000;font-weight: normal;font-size: 16px;}
-.que-con dl{font-size: 16px; padding: 20px;color: #333;display: none;min-height: 304px;line-height: 20px}
-.que-con dl.active,.que-type.active{display: block}
-.que-con dt{margin-bottom: 20px;}
-.que-con dt p{display: inline;}
-.que-con dd{margin-bottom: 20px;
-	border: 1px solid #d4d4d4;
-	border-radius: 4px;
-	padding: 12px 20px 13px;
-	background: #fff;
-	display: block;
-	word-break: break-all;
-}
-.que-con dd input[type="checkBox"],.que-con dd input[type="radio"]{display: none;}
-.que-con dd textarea{width: 100%;line-height: 24px;height: 74px;width: 938px;padding: 10px;border-color: #d4d4d4;resize: none;}
-
-.que-con .type-C dd{overflow: hidden;padding: 0;border: 0}
-.jx-que-con{border-bottom: 1px solid #eee}
-.jx-que-con dl{display: block;min-height: initial;}
-.jx-que-con dd.cur{cursor: pointer;border:1px solid #a5ded2;color: #25bb9b;}
-.jx-que-con dt{padding: 20px;background: #f3f3f3;margin-top: 20px;border-radius: 3px}
-.jx-que-con dt i{display: inline-block;width: 20px;height: 20px;border-radius: 50px;
-	background: #59b59c;color: #fff;text-align: center;line-height: 20px;margin-right: 8px}
-.que-con .news-old{font-size: 14px;border: 0;padding: 20px 0}
-.news-old span{padding-right: 15px}
-.news-old span.right{    padding-right: 0px;color: #59b59c;font-size: 19px;}
-.news-old span.you{    padding-right: 0px;color: #1473cb;font-size: 19px;}
-.news-old span.jx{    padding-right: 0px;color: #333;font-size: 19px;}
-.news-old span.score{    padding-right: 0px;color: #d84325;font-size: 19px;}
-.news-old p{margin-bottom: 30px;margin-left: 20px;}
-.img-intor{margin: 30px 0 50px;}
-.img-intor img{display: inline-block;width: 166px;vertical-align: top;margin-right: 30px;}
-.img-intor div{display: inline-block;height: 140px;text-align: left;padding-top: 20px;}
-.img-intor div p{line-height: 32px;font-size: 16px;color: #666;}
-.score-con .img-intor p{font-size:20px;color:#03110e;;}
-.score-con{margin: 30px auto;}
-.score-con .img-intor {
-	margin: 30px 0;
-}
-.score-con .que-con,.score-con .analysis{text-align:left} */
-
-
 </style>

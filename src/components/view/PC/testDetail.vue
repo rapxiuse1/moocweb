@@ -2,7 +2,7 @@
   <div class="layout">
     <Layout :style="{minHeight:'100vh'}">
     <m-header></m-header>
-    <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+    <Content :style="{padding: 0, minHeight: '280px',width:'62.5%', background: '#fff'}">
 			<!--内容-->
 			<div class="title-con">
 				<h1>
@@ -87,5 +87,8 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
+}
 </style>

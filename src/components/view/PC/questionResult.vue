@@ -2,7 +2,7 @@
   <div class="layout">
     <Layout :style="{minHeight:'100vh'}">
     <m-header></m-header>
-    <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+    <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
       <div class="yl_main">
       <!--<div :id="'myChart'+(index)"></div>-->
       <div class="result_tit">
@@ -344,6 +344,10 @@ export default {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
+}
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
 }
 table {
   border-collapse: collapse;

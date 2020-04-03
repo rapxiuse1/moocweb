@@ -1,39 +1,27 @@
 <template>
    <div class="layout">
-        <Layout :style="{minHeight:'100vh'}">
+      <Layout :style="{minHeight:'100vh'}">
           <m-header></m-header>
-          <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
-            <div class="nk-content">
-              <div class="resource-mod">
-                <div class="resource-mod-hd">
-                  <div class="menu">
-                  <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage">
-                    <MenuItem name="all">问卷调查</MenuItem>                
-                  </Menu>
-                  </div>
-                  <div class="bor"></div>
-                </div>
-                <div class="resource-mod-bd">
-                  <div class="resource-sub-mod">
-                    <div class="bd">
-                      <div class="mock-jobs-list clearfix">
-                        <a class="mock-jobs-item" v-for="(test,index) in testList" :key="index">
-                           <router-link :to="{name:'questionSurvey',query:{queId:test.id}}">
-                            <span class="mock-jobs-name">{{test.asq_name}}</span>
-                            <div class="mock-jobs-img">
-                              <img src="@/assets/question.png" alt="">
-                            </div>
-                          </router-link>                 
-                        </a>                
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
+            <div class="tips">
+              <img class="problem" src="@/assets/WJDC.png" alt="">
+              <span class="text">问卷调查</span>
             </div>
+            <div class="content">
+              <div class="resource-mod-bd">
+                <div class="clearfix">
+                  <a class="mock-jobs-item"  v-for="(test,index) in testList"  :key="index" @click="goSur(test)">
+                    <img class="mock-jobs-img" src="@/assets/question.png" alt="">
+                    <img class="mock-jobs-img1" src="@/assets/question1.png" alt="">
+                    <p class="mock-jobs-name">{{test.asq_name}}</p>                
+                  </a>                
+                </div>                                
+              </div>                  
+            </div> 
           </Content>
+          <l-Modal ref="loginModal"></l-Modal>
           <m-footer></m-footer>
-        </Layout>
+      </Layout>
     </div>
 </template>
 
@@ -42,6 +30,7 @@
 import MHeader from '@/components/header/header.vue'
 import MFooter from '@/components/footer/footer.vue'
 import ajax from '@/utils/ajax'
+import lModal from '@/components/login/modal.vue'
 export default {
   data(){
     return{
@@ -62,10 +51,22 @@ export default {
       this.testList = data.result.result
       console.log(this.testList)
     },
+    goSur(test){
+      console.log(test)
+      let userName = sessionStorage.getItem("userName")
+      console.log(userName)
+      if(userName == null){
+        this.$refs.loginModal.show()
+        return
+      }
+      let testId = test.id
+      this.$router.push({path:'/questionSurvey',query:{queId:testId}})
+    }
   },
   components:{
     MFooter,
     MHeader,
+    lModal,
   }
 }
 </script>
@@ -78,51 +79,75 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
-.resource-mod .resource-mod-hd {
-  font-size: 18px;
-  color: #2f1c41c4;
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
+}
+.tips{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid rgba(217,217,217,1);
+}
+.problem{
+  width: 18px;
+  height: 18px;
+  padding-top: 1px;
+  vertical-align: middle;
+}
+.text{
+  width:64px;
+  height:21px;
+  font-size:16px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:21px;
+  color:rgba(102,102,102,1);
+  vertical-align: middle;
+  opacity:1;
+}
+.type{
+  width:36px;
+  height:24px;
+  font-size:14px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:24px;
+  color:rgba(153,153,153,1);
+  opacity:1;
+  vertical-align: bottom;
+  display: inline-block;
   margin-bottom: 15px;
-  padding: 0 25px;
 }
-.resource-mod .resource-mod-bd {
-  padding: 0 25px;
-  margin-left: 396px;
-  margin-right: 200px;
-}
-.resource-sub-mod .bd {
-  font-size: 0;
-}
-.mock-jobs-list {
-  font-size: 0;
-  margin-right: -30px;
+.resource-mod-bd {
+  padding: 0 30px;
 }
 .clearfix {
   display: block;
   zoom: 1;
 }
-a:link, a:visited {
-  text-decoration: none;
-}
-a {
-  color: #333;
-}
 .mock-jobs-item {
+  position: relative;
   display: inline-block;
   vertical-align: middle;
   box-sizing: border-box;
   text-align: center;
-  width: 240px;
+  width: 21%;
   height: 180px;
-  padding: 20px 10px;
-  margin: 0 20px 20px 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  margin-right: 3%;
+  margin-bottom: 6%;
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(217,217,217,1);
+  opacity:1;
+  border-radius:5px;
 }
 .mock-jobs-item:hover {
-  color: #25BB9B;
-  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+  box-shadow: 0 2px 6px #25BB9B;
 }
 .mock-jobs-name {
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  color:rgba(51,51,51,1);
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
@@ -130,39 +155,24 @@ a {
   white-space: nowrap;
   word-wrap: normal;
   max-width: 10em;
-  margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 14px;
+  margin-top: 188px;
 }
 .mock-jobs-img {
-  width: 148px;
-  height: 147px;
-  margin-bottom: -23px;
-  margin: -21px auto;
-  overflow: hidden;
-  color: rgba(187, 215, 255, 1);
-  display: block;
+  max-width:91px;
+  max-height: 103px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -46px;
+  margin-top: -52px;
+  z-index: 999;
 }
-.menu{
-  width:1920px;
-  height:64px;
-  background:rgba(255,255,255,1);
-  opacity:1;
-}
-.bor{
-  width:1200px;
-  height:0px;
-  border:2px solid rgba(34,87,180,1);
-  opacity:1;
-  margin-left: 360px;
-}
-.menu .ivu-menu{
-  margin-left: 360px;
-  background:rgba(255,255,255,1);
-}
-.menu .ivu-menu .ivu-menu-item{
-  color: rgba(51, 51, 51, 1);
-}
-.menu .ivu-menu .ivu-menu-item-active,.menu .ivu-menu .ivu-menu-item:hover{
-  color: rgba(50, 135, 255, 1);
+.mock-jobs-img1 {
+  position: absolute;
+  max-width:81px;
+  max-height: 87px;
+  margin-left: -50px;
+  margin-top: 50px;
 }
 </style>

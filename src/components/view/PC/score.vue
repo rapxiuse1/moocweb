@@ -2,7 +2,7 @@
   <div class="layout">
     <Layout :style="{minHeight:'100vh'}">
       <m-header></m-header>
-      <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+      <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
         <!--内容-->
         <div class="title-con score-con">
           <h1>
@@ -140,59 +140,5 @@ jx-que-con dt i.err {
   color: #d84325;
   font-size: 35px
 }
-/* .jx-que-con{border-bottom: 1px solid #eee}
-.jx-que-con dl{display: block;min-height: initial;}
-.jx-que-con dd.cur{cursor: pointer;border:1px solid #a5ded2;color: #25bb9b;}
-.jx-que-con dt{padding: 20px;background: #f3f3f3;margin-top: 20px;border-radius: 3px}
-.jx-que-con dt i{display: inline-block;width: 20px;height: 20px;border-radius: 50px;
-	background: #59b59c;color: #fff;text-align: center;line-height: 20px;margin-right: 8px}
-.jx-que-con dt i.err {
-  background: #d84325;
-  color: #d84325;
-}
-.jx-que-con dt i.cur {
-  background: #25bb9b;
-  color: #25bb9b;
-}
-.img-intor p span {
-  color: #d84325;
-  font-size: 35px
-}
-.title-con{background: #fff;margin: 30px auto;text-align: center;border: 1px solid #e0e0e0;
-			border-radius: 3px;overflow: hidden;padding: 20px;width: 960px;}
-.title-con h1{font-size: 22px;line-height: 40px;color: #333;}
-.title-con h1:before{background: #ff6547;
-	content: "";
-	display: inline-block;
-	width: 7px;
-	height: 7px;
-	margin-right: 5px;
-	margin-bottom: 2px;
-	vertical-align: middle;
-}
-.title-con h1 i{color: #ff6000;font-weight: normal;font-size: 16px;}
-.img-intor{margin: 30px 0 50px;}
-.img-intor img{display: inline-block;width: 166px;vertical-align: top;margin-right: 30px;}
-.img-intor div{display: inline-block;height: 140px;text-align: left;padding-top: 20px;}
-.img-intor div p{line-height: 32px;font-size: 16px;color: #666;}
-.exam-notice{
-	text-align: left;
-	background: #f0f0f0;
-	color: #666!important;
-	padding: 20px;
-	max-height: 300px;
-	max-width: 780px;
-	border-radius: 0;
-	border: none;
-	overflow-y: auto;
-	margin: 30px auto 50px;
-	z-index: 1;
-	position: relative;
-	font-size: 14px;
-}
-.exam-notice p{line-height: 36px;}
-.but input{width: 180px;margin: 0 auto;display: block;color: #fff;font-size: 14px;border-radius: 3px;    text-align: center;
-padding: 10px 0;background: #ff6000;border: #009F95;margin-bottom: 30px;}
-.but input:hover{cursor: pointer;} */
 
 </style>

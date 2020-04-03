@@ -1,98 +1,57 @@
 <template>
-    <Header>
-        <div class="layout-logo">
-          <img src="@/assets/logo.png" alt="">
-        </div>
-        <div class="layout-nav">
-          <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage">
-            <MenuItem name="knowledge">
-                常见问题
-            </MenuItem>
-            <MenuItem name="onlinetest">
-                在线考试
-            </MenuItem>
-            <MenuItem name="questionList">
-                问卷调查
-            </MenuItem>
-            <MenuItem name="feedBack">
-                意见反馈
-            </MenuItem>
-          </Menu>          
-        </div> 
-        <div class="layout-login">
-          <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage">
-            <MenuItem name="logout">
-            <Icon type="ios-contact" />
-                登出
-            </MenuItem>
-          </Menu>
-        </div>    
-     <!-- <Modal v-model="modalShow" width="450" footer-hide>
-      <div class="login-main">
-        <Tabs :value="loginreg">
-          <TabPane label="登录" name="login">
-            <Form ref="loginData1" :model="loginData1" :label-width="60">
-                <FormItem label="用户名" prop="acct">
-                    <Input type="text" v-model="loginData1.acct" placeholder="请输入账号" style="width: 260px"></Input>
-                </FormItem>
-                <FormItem label="密码" prop="pass">
-                    <Input type="password" v-model="loginData1.pass" placeholder="请输入密码" style="width: 260px"></Input>
-                </FormItem>
-                <FormItem label="验证码" prop="code">
-                    <Input type="text" v-model="loginData1.code" placeholder="验证码" style="width: 260px"></Input>
-                    <div class="code">
-                      <img id="img_code2" :style="{width:'80px',}">
-                    </div>
-                </FormItem>
-            </Form>
-                <div class="control">
-                  <div class="control-a">
-                    <a @click="findpwd">找回密码 | </a>
-                    <a @click="handleReset('loginData1')">重置</a>
-                  </div>
-                </div>
-                <Button class="form-footer" type="primary" long @click="handleSubmit('loginData1')">登录</Button>
-                <div class="privacy_tip">
-                  登录即同意
-                  <a @click="privacy">使用协议</a>
-                </div>
-          </TabPane>
-          <TabPane label="注册" name="register">
-            <Form ref="loginData2" :model="loginData2"  :label-width="60">
-              <FormItem label="用户名" prop="acct">
-                  <Input type="text" v-model="loginData2.acct" placeholder="请输入您的用户名" style="width: 260px"></Input>
-              </FormItem>
-              <FormItem label="密码" prop="pass">
-                  <Input type="password" v-model="loginData2.pass" placeholder="请输入您的密码" style="width: 260px"></Input>
-              </FormItem>
-              <FormItem label="密码" prop="pass2">
-                  <Input type="password" v-model="loginData2.pass2" placeholder="请再次输入密码" style="width: 260px"></Input>
-              </FormItem>
-              <FormItem label="手机号" prop="phone">
-                  <Input type="text" v-model="loginData2.phone" placeholder="请输入您的手机号" style="width: 260px"></Input>
-              </FormItem>
-              <FormItem label="证件号" prop="cardno">
-                  <Input type="text" v-model="loginData2.cardno" placeholder="请输入您的证件号" style="width: 260px"></Input>
-              </FormItem>
-            </Form>
-              <Button class="form-footer" type="primary" long @click="handleSubmit('loginData2')">注册</Button>
-          </TabPane>
-        </Tabs>
+  <Header>
+    <div class="layout-logo">
+      <img src="@/assets/logo.png" alt="">
+    </div>
+    <div class="layout-nav">
+      <Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="turnToPage" >
+        <MenuItem name="home">
+          首页
+        </MenuItem>
+        <MenuItem name="knowledge" @mouseenter.native="onMouseOver" @mouseleave.native="onMouseout">
+          常见问题
+          <div class="hoverCon" v-show="seen">
+            <div style="margin-top:16px;"   v-for ="(nav,index) in hoverList" :key="index">{{nav.name}}</div>
+          </div>
+        </MenuItem>
+        <MenuItem name="onlinetest">
+          在线考试
+        </MenuItem>
+        <MenuItem name="questionList">
+          问卷调查
+        </MenuItem>
+        <MenuItem name="feedBack">
+          意见反馈
+        </MenuItem>
+      </Menu>
+    </div>
+    <div class="layout-login">
+      <div style="display: inline-block;">
+        <input class="search" type="text" placeholder="请输入搜索的内容">
+        <img class="searchIcon" src="@/assets/search.png" alt=""/>
       </div>
-     </Modal> -->
-     <Modal v-model="outShow" width="330" @on-ok="ok" @on-cancel="cancel">
-       <p>确定退出登录吗?</p>
-     </Modal>
-    </Header>
+      <div class="left">
+        <img class="phone" src="@/assets/phone.png" alt="">
+        <span class="title">小程序</span>
+      </div>
+      <div class="right">
+        <a @click="goLogin()">登录</a>
+        <div class="line1"></div>
+        <a>注册</a>
+      </div>
+    </div>
+    <l-Modal ref="loginModal"></l-Modal>    
+  </Header>
 </template>
 
 <script>
 import ajax from '@/utils/ajax'
+import lModal from '@/components/login/modal.vue'
 export default {
   data(){
     return{
-      modalShow:false,
-      outShow:false,
+      seen:false,
+      hoverList:[],
       loginData1: {
         acct:'',
         pass:'',
@@ -107,83 +66,34 @@ export default {
       },
       resultdesc:'',
       loginreg:'',
+      b:'',//注册判断
     }
+  },
+  created(){
+    this.getKnowledge()
   },
   methods:{
     turnToPage(name){
       console.log(name)
-      if(name == "register"|| name == "login"){
-        this.loginreg = name
-        console.log(this.loginreg)
-        console.log(this.global_.loginUrl)
-        this.login = new Login({
-          check: false, 
-          basePath: this.global_.loginUrl, 
-          dealResult: false
-        });
-        console.log(this.login)
-        this.login.setCode(document.getElementById("img_code2"));
-        let vm = this
-        this.login.request(function(method, param) {
-          ajax(method, param, function(data) {
-            console.log(data.resultdesc)
-            vm.resultdesc = data.resultdesc
-            vm.alert(data);
-          })
-        })
-        this.modalShow = !this.modalShow
-        return
-      }else if(name == 'logout'){
-        this.outShow = !this.outShow
-        return
-      }
       this.$router.push({ path: name });
     },
-    alert(data) {
-      console.log(data.result)
-      if(data.result == true){
-        this.$router.push('knowledge')
-      }else{
-        this.$Message.info(data.resultdesc)
-      }
-    }, 
-    handleSubmit (name) {
-      if(name == "loginData1"){
-        let a = this.login.bindLogin({
-          username: this.loginData1.acct,
-          pwd: this.loginData1.pass,
-          code: this.loginData1.code,
-        })
-      }else if(name == "loginData2"){
-        let a = this.login.bindRegiste({
-          username: this.loginData2.acct,
-          pwd: this.loginData2.pass,
-          pwd2: this.loginData2.pass2,
-          phone: this.loginData2.phone,
-          cardno: this.loginData2.cardno,
-        })
-      }
+    goLogin(){
+      this.$refs.loginModal.show()
     },
-    handleReset (name) {
-      this.$refs[name].resetFields();
+
+    getKnowledge(){
+      let name = 'adt_web_getZSKFL'
+      this.hoverList = ajax(name).result
     },
-    findpwd(){
-      this.$router.push('findpwd')
+    onMouseOver(){
+      this.seen = true
     },
-    privacy(){
-      this.$router.push('privacy')
-    },
-    ok(){
-      sessionStorage.removeItem("userName")
-      sessionStorage.removeItem("userId")
-      let name = 'adt_web_logout'
-      let data = ajax(name)
-      console.log(data)
-      this.$router.push('login');
-    },
-    cancel(){
-      console.log('点击关闭')
+    onMouseout(){
+      this.seen = false
     }
+  },
+  components:{
+    lModal,
   }
 }
 </script>
@@ -191,37 +101,145 @@ export default {
 <style scoped>
 .ivu-layout-header{
   display: flex;
+  position: relative;
 }
 .ivu-layout-header,.ivu-menu{
   background: #2b303b;
+}
+.ivu-menu-dark.ivu-menu-horizontal{
   height: 64px;
   line-height: 64px;
 }
-
-.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item-active,.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item:hover{
+.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item a:active{
   color: #fff;
 }
-.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item{
-  color: #d9d9d9;
+.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item:hover{
+  background:rgba(245,250,255,1);
+  color:rgba(50,135,255,1);
+  font-family:Microsoft YaHei;
+  font-weight:bold;
 }
 .layout-logo{
-  width: 144px;
-  height: 35px;
   background: #2b303b;
   border-radius: 3px;
-  margin: 15px 0 14px 216px;
+  float: left;
+  margin-left: 15%;
+}
+.layout-logo img{
+  margin-top: 15px;
 }
 .layout-nav{
-  flex: 1;
-  height: 64px;
-  line-height: 64px;
-  margin: 0 auto;
-  margin-left: 243px;
+  margin-left: 1%;
+  text-align: center;
   border-bottom:2px solid #2b303b;
+  float: left;
+  position: relative;
+}
+.hoverCon{
+  width:88px;
+  background:rgba(255,255,255,1);;
+  position: absolute;
+  top: 60px;
+  right: 5px;
+  font-size:12px;
+  z-index: 999;
+  text-align: center;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:16px;
+  color:rgba(51,51,51,1);
+  opacity:1;
+}
+.search{
+  width: 249px;
+  height:33px;
+  border:1px solid rgba(102,102,102,1);
+  background:rgba(43,48,59,1);
+  box-shadow:0px 4px 4px rgba(0,0,0,0.1);
+  opacity:1;
+  border-radius:3px;
+  font-size:11px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:14px;
+  color:rgba(153,153,153,1);
+  vertical-align: middle;
+}
+.searchIcon{
+  width: 22px;
+  height: 23px;
+  vertical-align: middle;
+  margin-left: -33px;
+  margin-top: -2px;
+}
+input::-webkit-input-placeholder {
+  left: 8px;
+  position: relative;
 }
 .layout-login{
-  margin-right: 100px;
-  width: 100px;
+  margin-top: -1px;
+  margin-left: 40px;
+  float: right;
 }
+.left{
+  margin-left: 60px;
+  display: inline-block;
+}
+.phone{
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 14px;
+  height: 20px;
+}
+.title{
+  width:48px;
+  height:21px;
+  font-size:14px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:21px;
+  color:rgba(217,217,217,1);
+  opacity:1;
+}
+.right{
+  display: inline-block;
+  margin-left: 37px;
+}
+.right a{
+  width:32px;
+  height:21px;
+  font-size:14px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  line-height:21px;
+  color:rgba(217,217,217,1);
+  opacity:1;
+}
+.line1{
+  margin: -2px 8px;
+  background: rgba(217,217,217,1);
+  width: 1px;
+  height: 14px;
+  display: inline-block;
+} 
 
+.login {
+  width: 100%;
+  height: 100vh;	
+	margin: 0 auto;
+	background-image: url(../../assets/bg.png);
+	background-repeat: no-repeat;
+	background-size: cover; 
+	overflow: auto;
+  position: relative;
+}
+.box{
+  width: 32%;
+  background:rgba(255,255,255,0.3);
+  border-radius:10px;
+  position: absolute;
+  left: 60%;
+  top: 50%;
+  margin-top: -15%;
+}
 </style>

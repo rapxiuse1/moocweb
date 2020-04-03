@@ -2,7 +2,7 @@
     <div class="layout">
       <Layout :style="{minHeight:'100vh'}">
         <m-header></m-header>
-         <Content :style="{padding: 0, minHeight: '280px', background: '#fff'}">
+         <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
         <div class="shade_box" v-if="flag">
             <div class="shade_box_w">
                 <div class="pop-title">
@@ -165,6 +165,10 @@ export default {
   border-radius: 4px;
   overflow: hidden;
 }
+.ivu-layout-content{
+  margin-left: 18%;
+  margin-right: 18%;
+}
 .jx-que-con dt i.err {
   background: #d84325;
   color: #d84325;
@@ -186,76 +190,5 @@ export default {
   text-align: center;
   border: 1px solid #326f6b;
 }
-/* .shade_box{position: fixed;top: 0;left: 0;bottom: 0;right: 0;z-index: 1000;background: rgba(0, 0, 0, 0.6)}
-.shade_box_w{width: 630px;overflow: hidden;background: #f0f0f0;margin: 250px auto;border-radius: 4px}
-.shade_box .pop-title{padding: 15px 20px;overflow: hidden;}
-.shade_box .pop-title h3{font-size: 16px;font-weight: normal;line-height: 20px;border-left: 3px solid #ff6547;padding-left: 10px;}
-.shade_box_w p{padding:50px 100px;text-align: center;font-size: 16px;background: #fff;line-height: 30px}
-.shade_box .que-but input{margin-top: 20px;margin-bottom: 20px}
-.shade_box .que-but input.gray{background: #bbb}
-.title-con{background: #fff;margin: 30px auto;text-align: center;border: 1px solid #e0e0e0;
-			border-radius: 3px;overflow: hidden;padding: 20px;width: 960px;}
-.title-con h1{font-size: 22px;line-height: 40px;color: #333;}
-.title-con h1:before{background: #ff6547;
-	content: "";
-	display: inline-block;
-	width: 7px;
-	height: 7px;
-	margin-right: 5px;
-	margin-bottom: 2px;
-	vertical-align: middle;
-}
-.title-con h1 i{color: #ff6000;font-weight: normal;font-size: 16px;}
-.score-con .img-intor p{font-size:20px;color:#03110e;;}
-.score-con{margin: 30px auto;}
-.score-con .img-intor {
-	margin: 30px 0;
-}
-.score-con .que-con,.score-con .analysis{text-align:left}
-.score-con .analysis p.border-p{border-bottom:2px solid #25bb9b;}
-.score-con .analysis span{padding: 0 30px;background: #25bb9b;color:#fff;font-size: 14px;display: inline-block;height: 40px;line-height: 40px}
-.analysis .que-card{padding:0}
-.analysis .que-card ul{margin-top: 26px;padding-bottom: 30px;border-bottom: 1px solid #eee}
-.analysis .que-card ul li{width: 32px;height: 32px;line-height: 32px;font-size: 14px;margin: 5px;}
-.analysis .que-card ul li p{color: #fff;background: #ffc300}
-.analysis .que-card ul li.Allerr p{background: #d84325 !important}
-.analysis .que-card ul li p.err{background: #d84325}
-.analysis .que-card ul li p.cur{background: #25bb9b}
 
-.jx-que-con{border-bottom: 1px solid #eee}
-.jx-que-con dl{display: block;min-height: initial;}
-.que-con .news-old{font-size: 14px;border: 0;padding: 20px 0}
-.news-old span{padding-right: 15px}
-.news-old span.right{    padding-right: 0px;color: #59b59c;font-size: 19px;}
-.news-old span.you{    padding-right: 0px;color: #1473cb;font-size: 19px;}
-.news-old span.jx{    padding-right: 0px;color: #333;font-size: 19px;}
-.news-old span.score{    padding-right: 0px;color: #d84325;font-size: 19px;}
-.news-old p{margin-bottom: 30px;margin-left: 20px;}
-
-.jx-que-con dd.cur{cursor: pointer;border:1px solid #a5ded2;color: #25bb9b;}
-.jx-que-con dt{padding: 20px;background: #f3f3f3;margin-top: 20px;border-radius: 3px}
-.jx-que-con dt i{display: inline-block;width: 20px;height: 20px;border-radius: 50px;
-	background: #59b59c;color: #fff;text-align: center;line-height: 20px;margin-right: 8px}
-
-.jx-que-con dt i.err {
-  background: #d84325;
-  color: #d84325;
-}
-
-.jx-que-con dt i.cur {
-  background: #25bb9b;
-  color: #25bb9b;
-}
-.img-intor p span {
-  color: #d84325;
-  font-size: 35px;
-}
-.news-old input.inpscore {
-  width: 63px;
-  font-size: 18px;
-  border-radius: 3px;
-  padding: 5px 0;
-  text-align: center;
-  border: 1px solid #326f6b;
-} */
 </style>

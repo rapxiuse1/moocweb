@@ -11,7 +11,12 @@ export default new Router({
       component: () => import('@/components/view/knowledge'),
     },
     {
-      path: '/knowledge',//首页、常见问题
+      path: '/home',//首页
+      name: 'home',
+      component: () => import('@/components/view/home')
+    },
+    {
+      path: '/knowledge',//常见问题
       name: 'knowledge',
       component: () => import('@/components/view/knowledge')
     },

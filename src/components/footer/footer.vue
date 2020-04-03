@@ -29,12 +29,12 @@ export default {
 
 <style scoped>
 .footer{
-  height:160px;
   background:rgba(46,48,51,1);
   box-shadow:0px 3px 6px rgba(0,0,0,0.16);
   opacity:1;
+  padding-top: 18px;
+  padding-bottom: 2%;
 }
-
 .link{
   width:655px;
   height:19px;
