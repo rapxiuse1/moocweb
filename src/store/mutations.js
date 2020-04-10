@@ -1,12 +1,7 @@
-//更改用户信息
-export const userStatus = (state,user) => {
-  if(user){
-    state.currentUser = user
-    state.isLogin = true
-  }else if(user == null){
-    //登出的时候，清空sessionStorage里的东西
-    sessionStorage.setItem("userName",null)
-    state.currentUser = null
-    state.isLogin = false
+//变更存储的数据
+const mutations={
+  login(state,v){
+    state.userInfo=v;
   }
 }
+export default mutations;

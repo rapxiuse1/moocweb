@@ -1,12 +1,13 @@
 <template>
    <div class="layout">
-        <Layout :style="{minHeight:'100vh'}">
+        <Layout :style="{minHeight:'100vh',background: '#F5F5F5'}">
           <m-header></m-header>
           <Content :style="{padding: 0, minHeight: '280px', width:'62.5%', background: '#fff'}">
             <div class="tips">
               <img class="problem" src="@/assets/ZXKS.png" alt="">
               <span class="text">在线考试</span>
             </div>
+            <div class="staright"></div>
             <div class="menu">
               <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage" active-name="all">
                 <MenuItem name="all">全部</MenuItem>
@@ -128,18 +129,19 @@ export default {
 <style scoped>
 .layout{
   border: 1px solid #d7dde4;
-  background: #f5f7f9;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
 }
 .ivu-layout-content{
-  margin-left: 18%;
-  margin-right: 18%;
+  margin: 2% 18%;
+  border-radius:5px;
 }
 .menu{
   background:rgba(255,255,255,1);
   opacity:1;
+  margin-top: 3%;
+  margin-left: 24px;
   border-bottom:2px solid rgba(50,135,255,1);
 }
 .menu .ivu-menu{
@@ -167,14 +169,23 @@ export default {
   color: rgba(255,255,255,1);
 }
 .tips{
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 18px;
+  margin-left: 24px;
+}
+.staright{
+  width: 100%;
+  margin-top: 2%;
+  height:0px;
+  border:1px solid rgba(238,238,238,1);
 }
 .problem{
   width: 18px;
   height: 18px;
   padding-top: 1px;
   vertical-align: middle;
+}
+.content{
+  margin-left: 24px;
 }
 .text{
   width:64px;
@@ -211,7 +222,6 @@ export default {
 .menu2 .ivu-menu{
   background:rgba(255,255,255,1);
   height: 24px;
-  z-index: 99;
 }
 .menu2 .ivu-menu .ivu-menu-item{
   color: rgba(51, 51, 51, 1);

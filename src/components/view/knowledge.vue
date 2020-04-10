@@ -1,12 +1,13 @@
 <template>
    <div class="layout">
-      <Layout :style="{minHeight:'100vh'}">
+      <Layout :style="{minHeight:'100vh',background: '#F5F5F5'}">
           <m-header></m-header>
-            <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff'}">
+            <Content :style="{padding: 0, minHeight: '280px', width:'62.5%',background: '#fff',position:'relative'}">
                 <div class="tips">
                   <img class="problem" src="@/assets/problem.png" alt="">
                   <span class="text">常见问题</span>
                 </div>
+                <div class="staright"></div>
                 <div class="menu">
                   <Menu mode="horizontal" theme="dark" width="auto" @on-select="inPage" active-name="all">
                     <MenuItem name="all">全部</MenuItem>
@@ -27,16 +28,12 @@
                   <div class="table">
                     <Table width='100%' :columns="columns" :data="curData" @on-row-click="detailShow">
                     </Table>
-                  <div class="page" style="margin: 10px;overflow: hidden">
-                    <!-- <a>首页</a>
-                    <a>上一页</a>
-                    <a>下一页</a>
-                    <a>尾页</a> -->
-                    <Page :total="dataCount" :page-size="pageSize" show-total show-elevator
-                    :current="pageCurrent" @on-change="changePage">
-                    </Page>
-                  </div> 
                   </div>        
+                </div>
+                <div class="page">
+                  <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer
+                  :current="pageCurrent" @on-change="changePage">
+                  </Page>
                 </div>               
             </Content> 
           <m-footer></m-footer>
@@ -209,7 +206,7 @@ export default {
       //打包路径
       this.content = columns.content.replace(new RegExp("@serveruirl@","gm"),location.origin + "/" + location.pathname.split("/")[1]+'/')
       }
-      this.$router.push({path:'/detail',query:{headline:columns.headline,subtitle:columns.subtitle,content:columns.content}})
+      this.$router.push({name:'detail',params:{headline:columns.headline,subtitle:columns.subtitle,content:columns.content}})
     },
   },
   components:{
@@ -222,18 +219,19 @@ export default {
 <style scoped>
 .layout{
   border: 1px solid #d7dde4;
-  background: #f5f7f9;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
 }
 .ivu-layout-content{
-  margin-left: 18%;
-  margin-right: 18%;
+  margin: 2% 18%;
+  border-radius:5px;
 }
 .menu{
   background:rgba(255,255,255,1);
   opacity:1;
+  margin-top: 3%;
+  margin-left: 24px;
   border-bottom:2px solid rgba(50,135,255,1);
 }
 .menu .ivu-menu{
@@ -285,7 +283,6 @@ export default {
 .menu2 .ivu-menu{
   background:rgba(255,255,255,1);
   height: 24px;
-  z-index: 99;
 }
 .menu2 .ivu-menu .ivu-menu-item{
   color: rgba(51, 51, 51, 1);
@@ -298,18 +295,34 @@ export default {
 .menu2 .ivu-menu .ivu-menu-item-active,.menu2 .ivu-menu .ivu-menu-item:hover{
   color: rgba(50, 135, 255, 1);
 }
+.page{
+  overflow: hidden;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
 .page .ivu-page{  
   float: right;
 }
 .tips{
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 18px;
+  margin-left: 24px;
+}
+.staright{
+  width: 100%;
+  margin-top: 2%;
+  height:0px;
+  border:1px solid rgba(238,238,238,1);
 }
 .problem{
   width: 18px;
   height: 18px;
   padding-top: 1px;
   vertical-align: middle;
+}
+.content{
+  margin-left: 24px;
+  padding-bottom: 50px;
 }
 .text{
   width:64px;

@@ -1,13 +1,14 @@
 <template>
    <div class="layout">
-        <Layout :style="{minHeight:'100vh'}">
+        <Layout :style="{minHeight:'100vh',background: '#F5F5F5'}">
           <m-header></m-header>
           <Content :style="{padding: 0, minHeight: '280px', width:'62.5%', background: '#fff'}">
             <div class="tips">
               <img class="problem" src="@/assets/YJFK.png" alt="">
               <span class="text">意见反馈</span>
             </div>
-            <div class="content">
+            <div class="staright"></div>
+            <div class="content" style="margin-top:3%">
               <div class="resource-mod-bd">
                 <div class="clearfix">
                   <a class="mock-jobs-item" v-for="(test,index) in testList" :key="index" @click="goFeed(test)">
@@ -72,20 +73,23 @@ export default {
 <style scoped>
 .layout{
   border: 1px solid #d7dde4;
-  background: #f5f7f9;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
 }
 .ivu-layout-content{
-  margin-left: 18%;
-  margin-right: 18%;
+  margin: 2% 18%;
+  border-radius:5px;
 }
 .tips{
-  margin-top: 30px;
-  margin-bottom: 30px;
-  padding-bottom: 17px;
-  border-bottom: 1px solid rgba(217,217,217,1);
+  margin-top: 18px;
+  margin-left: 24px;
+}
+.staright{
+  width: 100%;
+  margin-top: 2%;
+  height:0px;
+  border:1px solid rgba(238,238,238,1);
 }
 .problem{
   width: 18px;

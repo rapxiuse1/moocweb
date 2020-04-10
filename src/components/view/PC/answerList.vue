@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-      <Layout :style="{minHeight:'100vh'}">
+      <Layout :style="{minHeight:'100vh',background: '#F5F5F5'}">
         <m-header></m-header>
          <Content :style="{padding: 0, minHeight: '280px',width:'62.5%', background: '#fff'}">
         <!--内容-->
@@ -156,14 +156,13 @@ export default {
 @import "../../.././assets/css/index.css";
 .layout{
   border: 1px solid #d7dde4;
-  background: #f5f7f9;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
 }
 .ivu-layout-content{
-  margin-left: 18%;
-  margin-right: 18%;
+  margin: 2% 18%;
+  border-radius:5px;
 }
 .jx-que-con dt i.err {
   background: #d84325;

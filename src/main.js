@@ -9,9 +9,11 @@ import axios from 'axios'
 import qs from 'qs'
 import $ from 'jQuery'
 import Router from 'vue-router'
-import store from './store'
 import global from '@/components/global'
 import echarts from 'echarts'
+import Vuex from 'vuex'
+import store from './store'
+Vue.use(Vuex)
 Vue.prototype.$echarts = echarts
 Vue.prototype.$ = $
 Vue.prototype.$http = axios

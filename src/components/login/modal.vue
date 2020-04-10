@@ -61,12 +61,6 @@
 <script>
 import ajax from '@/utils/ajax'
 export default {
-  // props:{
-  //   modalShow:{
-  //     type:Boolean,
-  //     default:false,
-  //   }
-  // },
   data(){
     return{
       modalShow:false,
