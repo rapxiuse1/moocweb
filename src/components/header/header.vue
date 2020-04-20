@@ -57,7 +57,7 @@
            <div class="hoverCon2" v-show="detailseen">
             <ul class="ul">
               <li>
-                <a class="firsta">个人信息</a>
+                <a class="firsta" @click="goDetails">个人信息</a>
               </li>
               <li>
                 <a>我参与的</a>
@@ -172,6 +172,9 @@ export default {
         this.userName = sessionStorage.getItem("userName")
       },500)
       
+    },
+    goDetails(){
+      this.$router.push('personDetails')
     }
   },
   components:{
@@ -186,7 +189,7 @@ export default {
         window.clearInterval(this.referUserName)
       }else{
         this.loginSeen = true
-        this.profileSeen = true
+        this.profileSeen = false
       }
     }
   },

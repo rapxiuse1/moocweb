@@ -99,5 +99,10 @@ export default new Router({
         requireAuth: true,
       }
     },
+    {
+      path: '/personDetails',//个人信息
+      name: 'personDetails',
+      component: () => import('@/components/view/PC/personDetails')
+    },
   ]
 })

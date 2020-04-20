@@ -12,6 +12,7 @@ import Router from 'vue-router'
 import global from '@/components/global'
 import echarts from 'echarts'
 import Vuex from 'vuex'
+import VueCropper from 'vue-cropper' //图片裁剪工具
 import store from './store'
 Vue.use(Vuex)
 Vue.prototype.$echarts = echarts
@@ -21,6 +22,7 @@ Vue.prototype.$qs = qs
 Vue.prototype.global_ = global
 Vue.config.productionTip = false
 Vue.use(ViewUI)
+Vue.use(VueCropper)
 Vue.prototype.$Message.config({
   top: 70,
   duration:2
